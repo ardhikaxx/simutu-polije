@@ -13,29 +13,27 @@
             </ol>
         </nav>
     </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+        <i class="fas fa-plus me-1"></i>Tambah Role
+    </button>
 </div>
+
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
 
 <div class="card border-0 shadow-sm">
     <div class="card-body">
-        @php
-            $roles = Spatie\Permission\Models\Role::with('users')->get();
-
-            $roleDescriptions = [
-                'super_admin' => 'Super Administrator',
-                'admin_spmi' => 'Admin SPMI',
-                'kajur' => 'Kepala Jurusan',
-                'kaprodi' => 'Kepala Program Studi',
-                'gpm' => 'Gunada Penjaminan Mutu',
-                'auditor' => 'Auditor',
-                'auditor_ketua' => 'Ketua Auditor',
-                'dosen' => 'Dosen',
-                'tendik' => 'Tenaga Kependidikan',
-                'pimpinan' => 'Pimpinan',
-                'mahasiswa' => 'Mahasiswa',
-                'alumni' => 'Alumni',
-                'mitra_industri' => 'Mitra Industri',
-            ];
-        @endphp
         <div class="table-responsive">
             <table class="table table-striped table-bordered align-middle" id="dataTable">
                 <thead class="table-light">
@@ -59,9 +57,18 @@
                         </td>
                         <td>{{ $roleDescriptions[$role->name] ?? $role->name }}</td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary" title="Edit">
+                            <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-outline-primary" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </a>
+                            @if($role->name !== 'super_admin')
+                            <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="d-inline delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                            @endif
                         </td>
                     </tr>
                     @empty
@@ -77,6 +84,31 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="addRoleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('admin.roles.store') }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Tambah Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nama Role <span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Contoh: reviewer">
+                        @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i>Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -84,6 +116,24 @@
 $(document).ready(function() {
     $('#dataTable').DataTable({
         language: { url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json' }
+    });
+
+    $('.delete-form').on('submit', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            text: 'Role yang dihapus tidak dapat dikembalikan.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+        });
     });
 });
 </script>

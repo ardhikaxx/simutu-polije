@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Audit\HasilAuditController;
@@ -77,22 +79,22 @@ Route::middleware(['auth'])->group(function () {
         ]);
     })->name('notifications.unread-count');
 
-    Route::prefix('admin')->middleware('role:super_admin')->group(function () {
-        Route::get('/users', function () {
-            return view('admin.users.index');
-        })->name('admin.users.index');
+    Route::prefix('admin')->name('admin.')->middleware('role:super_admin')->group(function () {
+        Route::resource('users', AdminUserController::class)->except(['show']);
 
-        Route::get('/roles', function () {
-            return view('admin.roles.index');
-        })->name('admin.roles.index');
+        Route::get('/roles', [AdminRoleController::class, 'index'])->name('roles.index');
+        Route::post('/roles', [AdminRoleController::class, 'store'])->name('roles.store');
+        Route::get('/roles/{role}/edit', [AdminRoleController::class, 'edit'])->name('roles.edit');
+        Route::put('/roles/{role}', [AdminRoleController::class, 'update'])->name('roles.update');
+        Route::delete('/roles/{role}', [AdminRoleController::class, 'destroy'])->name('roles.destroy');
 
         Route::get('/activity-log', function () {
             return view('admin.activity-log.index');
-        })->name('admin.activity-log.index');
+        })->name('activity-log.index');
 
         Route::get('/settings', function () {
             return view('admin.settings.index');
-        })->name('admin.settings.index');
+        })->name('settings.index');
     });
 
     Route::middleware('role:super_admin|admin_spmi')->prefix('master-data')->name('master-data.')->group(function () {
@@ -106,7 +108,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware('role:super_admin|admin_spmi|kajur|kaprodi|gpm|auditor|auditor_ketua|dosen|tendik|pimpinan')->group(function () {
-        Route::resource('standar-mutu', StandarMutuController::class);
+        Route::resource('standar-mutu', StandarMutuController::class)->parameters(['standar-mutu' => 'standar']);
         Route::post('standar-mutu/{standar}/submit', [StandarMutuController::class, 'submit'])->name('standar-mutu.submit');
         Route::post('standar-mutu/{standar}/review', [StandarMutuController::class, 'review'])->name('standar-mutu.review');
         Route::post('standar-mutu/{standar}/approve', [StandarMutuController::class, 'approve'])->name('standar-mutu.approve');
@@ -116,7 +118,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('standar-mutu/{standar}/indikator/{indikator}', [IndikatorMutuController::class, 'update'])->name('standar-mutu.indikator.update');
         Route::delete('standar-mutu/{standar}/indikator/{indikator}', [IndikatorMutuController::class, 'destroy'])->name('standar-mutu.indikator.destroy');
 
-        Route::resource('dokumen-mutu', DokumenMutuController::class);
+        Route::resource('dokumen-mutu', DokumenMutuController::class)->parameters(['dokumen-mutu' => 'dokumen']);
         Route::post('dokumen-mutu/{dokumen}/submit', [DokumenMutuController::class, 'submit'])->name('dokumen-mutu.submit');
         Route::post('dokumen-mutu/{dokumen}/review', [DokumenMutuController::class, 'review'])->name('dokumen-mutu.review');
         Route::post('dokumen-mutu/{dokumen}/approve', [DokumenMutuController::class, 'approve'])->name('dokumen-mutu.approve');
@@ -124,7 +126,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dokumen-mutu/{dokumen}/versions', [DokumenMutuController::class, 'versions'])->name('dokumen-mutu.versions');
 
         Route::get('ppepp/dashboard', [PpeppController::class, 'dashboard'])->name('ppepp.dashboard');
-        Route::resource('ppepp', PpeppController::class)->only(['index', 'show']);
+        Route::resource('ppepp', PpeppController::class)->parameters(['ppepp' => 'siklus'])->only(['index', 'show']);
         Route::get('ppepp/{siklus}/pelaksanaan', [PpeppController::class, 'pelaksanaan'])->name('ppepp.pelaksanaan');
         Route::put('ppepp/pelaksanaan/{pelaksanaan}', [PpeppController::class, 'updatePelaksanaan'])->name('ppepp.pelaksanaan.update');
         Route::post('ppepp/pelaksanaan/{pelaksanaan}/eviden', [PpeppController::class, 'uploadEviden'])->name('ppepp.eviden.upload');
@@ -139,7 +141,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('audit/hasil/{hasil}/approve', [HasilAuditController::class, 'approve'])->name('audit.hasil.approve');
         Route::post('audit/temuan', [TemuanAuditController::class, 'store'])->name('audit.temuan.store');
         Route::put('audit/temuan/{temuan}', [TemuanAuditController::class, 'update'])->name('audit.temuan.update');
-        Route::resource('jadwal-audit', JadwalAuditController::class)->except(['edit', 'update']);
+        Route::resource('jadwal-audit', JadwalAuditController::class)->parameters(['jadwal-audit' => 'jadwal'])->except(['edit', 'update']);
         Route::post('jadwal-audit/{jadwal}/assign-team', [JadwalAuditController::class, 'assignTeam'])->name('jadwal-audit.assign-team');
         Route::get('audit', function () {
             return redirect()->route('jadwal-audit.index');
@@ -147,7 +149,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware('role:super_admin|admin_spmi|kajur|kaprodi|gpm|auditor|auditor_ketua')->group(function () {
-        Route::resource('tindak-lanjut', TindakLanjutController::class)->only(['index', 'show']);
+        Route::resource('tindak-lanjut', TindakLanjutController::class)->parameters(['tindak-lanjut' => 'tl'])->only(['index', 'show']);
         Route::post('tindak-lanjut/{tl}/progress', [TindakLanjutController::class, 'updateProgress'])->name('tindak-lanjut.progress.update');
         Route::post('tindak-lanjut/progress/{progress}/verify', [TindakLanjutController::class, 'verify'])->name('tindak-lanjut.progress.verify');
     });

@@ -13,16 +13,27 @@
             </ol>
         </nav>
     </div>
-    <a href="#" class="btn btn-primary">
+    <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
         <i class="fas fa-plus me-1"></i>Tambah User
     </a>
 </div>
 
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
+
 <div class="card border-0 shadow-sm">
     <div class="card-body">
-        @php
-            $users = App\Models\User::with('jurusan','programStudi','unitKerja')->latest()->get();
-        @endphp
         <div class="table-responsive">
             <table class="table table-striped table-bordered align-middle" id="dataTable">
                 <thead class="table-light">
@@ -54,10 +65,10 @@
                             </span>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary" title="Edit">
+                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-outline-primary" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="#" method="POST" class="d-inline delete-form">
+                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
@@ -86,6 +97,24 @@
 $(document).ready(function() {
     $('#dataTable').DataTable({
         language: { url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json' }
+    });
+
+    $('.delete-form').on('submit', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            text: 'Data yang dihapus tidak dapat dikembalikan.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+        });
     });
 });
 </script>
