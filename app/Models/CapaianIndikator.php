@@ -48,6 +48,6 @@ class CapaianIndikator extends Model
 
     public function dihitungOleh(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'dibuat_oleh');
+        return $this->belongsTo(User::class, 'dihitung_oleh');
     }
 }
