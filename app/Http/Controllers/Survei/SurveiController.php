@@ -41,9 +41,9 @@ class SurveiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'jenis_survei_id' => 'required|exists:jenis_surveis,id',
+            'jenis_survei_id' => 'required|exists:jenis_survei,id',
             'judul' => 'required|string|max:255',
-            'tahun_akademik_id' => 'required|exists:tahun_akademiks,id',
+            'tahun_akademik_id' => 'required|exists:tahun_akademik,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'pertanyaan' => 'required|array|min:1',
@@ -87,7 +87,7 @@ class SurveiController extends Controller
     {
         $validated = $request->validate([
             'answers' => 'required|array',
-            'answers.*.pertanyaan_survei_id' => 'required|exists:pertanyaan_surveis,id',
+            'answers.*.pertanyaan_survei_id' => 'required|exists:pertanyaan_survei,id',
             'answers.*.jawaban_teks' => 'nullable|string|max:1000',
             'answers.*.jawaban_rating' => 'nullable|integer|min:1|max:5',
         ]);
@@ -96,15 +96,15 @@ class SurveiController extends Controller
             $data = [
                 'survei_id' => $survei->id,
                 'pertanyaan_survei_id' => $answer['pertanyaan_survei_id'],
-                'diisi_oleh' => auth()->check() ? auth()->id() : null,
+                'responden_id' => auth()->check() ? auth()->id() : null,
             ];
 
             if (!empty($answer['jawaban_teks'])) {
-                $data['jawaban_teks'] = $answer['jawaban_teks'];
+                $data['teks_jawaban'] = $answer['jawaban_teks'];
             }
 
             if (!empty($answer['jawaban_rating'])) {
-                $data['jawaban_rating'] = $answer['jawaban_rating'];
+                $data['nilai_jawaban'] = $answer['jawaban_rating'];
             }
 
             JawabanSurvei::create($data);
@@ -119,20 +119,20 @@ class SurveiController extends Controller
         $survei->load(['jenisSurvei', 'pertanyaanSurvei', 'jawabanSurvei']);
 
         $stats = [
-            'total_responden' => $survei->jawabanSurvei->unique('diisi_oleh')->count(),
+            'total_responden' => $survei->jawabanSurvei->unique('responden_id')->count(),
             'total_jawaban' => $survei->jawabanSurvei->count(),
         ];
 
         $pertanyaanStats = $survei->pertanyaanSurvei->map(function ($pertanyaan) use ($survei) {
             $jawaban = $survei->jawabanSurvei->where('pertanyaan_survei_id', $pertanyaan->id);
 
-            $rataRata = $jawaban->avg('jawaban_rating');
+            $rataRata = $jawaban->avg('nilai_jawaban');
 
             return [
                 'pertanyaan' => $pertanyaan,
                 'total_jawaban' => $jawaban->count(),
                 'rata_rata_rating' => $rataRata ? round($rataRata, 2) : null,
-                'jawaban_teks' => $jawaban->pluck('jawaban_teks')->filter(),
+                'jawaban_teks' => $jawaban->pluck('teks_jawaban')->filter(),
             ];
         });
 
@@ -148,7 +148,7 @@ class SurveiController extends Controller
         $stats = [
             'total_survei' => $surveis->count(),
             'survei_aktif' => $surveis->where('status', 'Aktif')->count(),
-            'total_responden' => $surveis->sum(fn($s) => $s->jawabanSurvei->unique('diisi_oleh')->count()),
+            'total_responden' => $surveis->sum(fn($s) => $s->jawabanSurvei->unique('responden_id')->count()),
         ];
 
         return view('survei.dashboard', compact('surveis', 'stats'));
