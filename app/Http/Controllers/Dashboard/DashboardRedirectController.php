@@ -3,6 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\DokumenMutu;
+use App\Models\JadwalAudit;
+use App\Models\ProgramStudi;
+use App\Models\StandarMutu;
+use App\Models\Survei;
+use App\Models\TindakLanjutTemuan;
+use App\Models\User;
 
 class DashboardRedirectController extends Controller
 {
@@ -11,7 +18,17 @@ class DashboardRedirectController extends Controller
         $user = auth()->user();
 
         if ($user->hasRole('super_admin')) {
-            return view('dashboard.super-admin');
+            $stats = [
+                'totalUser' => User::count(),
+                'standarMutuAktif' => StandarMutu::where('status', 'Published')->count(),
+                'dokumenMutu' => DokumenMutu::count(),
+                'auditBerjalan' => JadwalAudit::whereIn('status', ['Terjadwal', 'Berlangsung'])->count(),
+                'tindakLanjutOpen' => TindakLanjutTemuan::whereIn('status', ['Belum Ditindaklanjuti', 'Dalam Proses'])->count(),
+                'surveiAktif' => Survei::where('status', 'Aktif')->count(),
+                'totalProdi' => ProgramStudi::count(),
+            ];
+
+            return view('dashboard.super-admin', compact('stats'));
         }
 
         if ($user->hasRole('admin_spmi')) {

@@ -14,7 +14,7 @@
         </nav>
     </div>
     <div class="d-flex gap-2">
-        <a href="#" class="btn btn-outline-primary"><i class="fas fa-edit me-1"></i>Edit Profil</a>
+        <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary"><i class="fas fa-edit me-1"></i>Edit Profil</a>
         <a href="{{ route('password.change') }}" class="btn btn-outline-secondary"><i class="fas fa-key me-1"></i>Ganti Password</a>
     </div>
 </div>

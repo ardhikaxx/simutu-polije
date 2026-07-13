@@ -22,15 +22,11 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-muted mb-1" style="font-size:0.78rem;">Total User</div>
-                        <div class="fw-bold fs-4" style="color:#1a237e;">--</div>
+                        <div class="fw-bold fs-4" style="color:#1a237e;">{{ $stats['totalUser'] }}</div>
                     </div>
                     <div class="stat-icon bg-primary bg-opacity-10 text-primary">
                         <i class="fas fa-users"></i>
                     </div>
-                </div>
-                <div style="font-size:0.75rem;">
-                    <span class="text-success"><i class="fas fa-arrow-up"></i> --%</span>
-                    <span class="text-muted ms-1">dari bulan lalu</span>
                 </div>
             </div>
         </div>
@@ -41,7 +37,7 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-muted mb-1" style="font-size:0.78rem;">Standar Mutu Aktif</div>
-                        <div class="fw-bold fs-4" style="color:#1a237e;">--</div>
+                        <div class="fw-bold fs-4" style="color:#1a237e;">{{ $stats['standarMutuAktif'] }}</div>
                     </div>
                     <div class="stat-icon bg-success bg-opacity-10 text-success">
                         <i class="fas fa-balance-scale"></i>
@@ -59,7 +55,7 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-muted mb-1" style="font-size:0.78rem;">Dokumen Mutu</div>
-                        <div class="fw-bold fs-4" style="color:#1a237e;">--</div>
+                        <div class="fw-bold fs-4" style="color:#1a237e;">{{ $stats['dokumenMutu'] }}</div>
                     </div>
                     <div class="stat-icon bg-warning bg-opacity-10 text-warning">
                         <i class="fas fa-file-alt"></i>
@@ -77,14 +73,14 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-muted mb-1" style="font-size:0.78rem;">Audit Berjalan</div>
-                        <div class="fw-bold fs-4" style="color:#1a237e;">--</div>
+                        <div class="fw-bold fs-4" style="color:#1a237e;">{{ $stats['auditBerjalan'] }}</div>
                     </div>
                     <div class="stat-icon bg-danger bg-opacity-10 text-danger">
                         <i class="fas fa-clipboard-check"></i>
                     </div>
                 </div>
                 <div style="font-size:0.75rem;">
-                    <span class="text-muted">Periode aktif</span>
+                    <span class="text-muted">Terjadwal / Berlangsung</span>
                 </div>
             </div>
         </div>
@@ -98,7 +94,7 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-muted mb-1" style="font-size:0.78rem;">Tindak Lanjut Open</div>
-                        <div class="fw-bold fs-4" style="color:#e53935;">--</div>
+                        <div class="fw-bold fs-4" style="color:#e53935;">{{ $stats['tindakLanjutOpen'] }}</div>
                     </div>
                     <div class="stat-icon bg-danger bg-opacity-10 text-danger">
                         <i class="fas fa-tasks"></i>
@@ -113,7 +109,7 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-muted mb-1" style="font-size:0.78rem;">Survei Aktif</div>
-                        <div class="fw-bold fs-4" style="color:#1a237e;">--</div>
+                        <div class="fw-bold fs-4" style="color:#1a237e;">{{ $stats['surveiAktif'] }}</div>
                     </div>
                     <div class="stat-icon bg-info bg-opacity-10 text-info">
                         <i class="fas fa-poll"></i>
@@ -128,7 +124,7 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-muted mb-1" style="font-size:0.78rem;">Prodi</div>
-                        <div class="fw-bold fs-4" style="color:#1a237e;">--</div>
+                        <div class="fw-bold fs-4" style="color:#1a237e;">{{ $stats['totalProdi'] }}</div>
                     </div>
                     <div class="stat-icon bg-primary bg-opacity-10 text-primary">
                         <i class="fas fa-graduation-cap"></i>

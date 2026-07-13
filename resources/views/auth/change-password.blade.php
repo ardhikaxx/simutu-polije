@@ -26,7 +26,7 @@
                 <h6 class="mb-0 fw-bold"><i class="fas fa-key me-2"></i>Form Ganti Password</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('password.change') }}" method="POST" id="changePasswordForm">
+                <form action="{{ route('password.change.store') }}" method="POST" id="changePasswordForm">
                     @csrf
 
                     <div class="mb-3">

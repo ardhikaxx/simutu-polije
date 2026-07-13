@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Audit\HasilAuditController;
 use App\Http\Controllers\Audit\JadwalAuditController;
 use App\Http\Controllers\Audit\TemuanAuditController;
@@ -65,13 +66,11 @@ Route::get('/reset-password/{token}', function ($token) {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', DashboardRedirectController::class)->name('dashboard');
 
-    Route::get('/profile', function () {
-        return view('auth.profile');
-    })->name('profile.show');
-
-    Route::get('/password/change', function () {
-        return view('auth.change-password');
-    })->name('password.change');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/password/change', [ProfileController::class, 'changePasswordForm'])->name('password.change');
+    Route::post('/password/change', [ProfileController::class, 'changePassword'])->name('password.change.store');
 
     Route::get('/notifications/unread-count', function () {
         return response()->json([
