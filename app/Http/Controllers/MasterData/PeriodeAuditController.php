@@ -27,7 +27,7 @@ class PeriodeAuditController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'tahun_akademik_id' => 'required|exists:tahun_akademiks,id',
+            'tahun_akademik_id' => 'required|exists:tahun_akademik,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
         ]);
@@ -49,7 +49,7 @@ class PeriodeAuditController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'tahun_akademik_id' => 'required|exists:tahun_akademiks,id',
+            'tahun_akademik_id' => 'required|exists:tahun_akademik,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
         ]);

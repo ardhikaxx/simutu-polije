@@ -24,7 +24,7 @@ class UnitKerjaController extends Controller
     {
         $validated = $request->validate([
             'nama_unit' => 'required|string|max:255',
-            'jenis' => 'required|in:Unit Kerja,Fungsional',
+            'jenis' => 'required|in:Akademik,Non-Akademik,Penunjang',
         ]);
 
         UnitKerja::create($validated);
@@ -42,7 +42,7 @@ class UnitKerjaController extends Controller
     {
         $validated = $request->validate([
             'nama_unit' => 'required|string|max:255',
-            'jenis' => 'required|in:Unit Kerja,Fungsional',
+            'jenis' => 'required|in:Akademik,Non-Akademik,Penunjang',
         ]);
 
         $unitKerja->update($validated);

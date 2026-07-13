@@ -24,7 +24,7 @@ class JurusanController extends Controller
     {
         $validated = $request->validate([
             'nama_jurusan' => 'required|string|max:255',
-            'kode_jurusan' => 'required|string|max:20|unique:fakultas_jurusans,kode_jurusan',
+            'kode_jurusan' => 'required|string|max:20|unique:fakultas_jurusan,kode_jurusan',
         ]);
 
         FakultasJurusan::create($validated);
@@ -42,7 +42,7 @@ class JurusanController extends Controller
     {
         $validated = $request->validate([
             'nama_jurusan' => 'required|string|max:255',
-            'kode_jurusan' => 'required|string|max:20|unique:fakultas_jurusans,kode_jurusan,' . $jurusan->id,
+            'kode_jurusan' => 'required|string|max:20|unique:fakultas_jurusan,kode_jurusan,' . $jurusan->id,
         ]);
 
         $jurusan->update($validated);

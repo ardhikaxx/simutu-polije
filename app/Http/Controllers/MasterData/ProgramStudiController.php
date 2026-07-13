@@ -26,10 +26,10 @@ class ProgramStudiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'jurusan_id' => 'required|exists:fakultas_jurusans,id',
+            'jurusan_id' => 'required|exists:fakultas_jurusan,id',
             'nama_prodi' => 'required|string|max:255',
-            'kode_prodi' => 'required|string|max:20|unique:program_studis,kode_prodi',
-            'jenjang' => 'required|in:D3,S1,S2,S3',
+            'kode_prodi' => 'required|string|max:20|unique:program_studi,kode_prodi',
+            'jenjang' => 'required|in:D3,D4,S2Terapan',
         ]);
 
         ProgramStudi::create($validated);
@@ -48,10 +48,10 @@ class ProgramStudiController extends Controller
     public function update(Request $request, ProgramStudi $prodi)
     {
         $validated = $request->validate([
-            'jurusan_id' => 'required|exists:fakultas_jurusans,id',
+            'jurusan_id' => 'required|exists:fakultas_jurusan,id',
             'nama_prodi' => 'required|string|max:255',
-            'kode_prodi' => 'required|string|max:20|unique:program_studis,kode_prodi,' . $prodi->id,
-            'jenjang' => 'required|in:D3,S1,S2,S3',
+            'kode_prodi' => 'required|string|max:20|unique:program_studi,kode_prodi,' . $prodi->id,
+            'jenjang' => 'required|in:D3,D4,S2Terapan',
         ]);
 
         $prodi->update($validated);
