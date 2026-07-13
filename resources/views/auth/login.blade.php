@@ -146,7 +146,7 @@
         <div class="login-card">
             <div class="login-header">
                 <div class="login-logo">
-                    <i class="fas fa-shield-halved"></i>
+                    <img src="{{ asset('assets/logo-polije.png') }}" alt="Logo Polije" style="width:52px;height:52px;object-fit:contain;">
                 </div>
                 <h1>SIMUTU POLIJE</h1>
                 <p>Sistem Informasi Penjaminan Mutu</p>
