@@ -52,11 +52,11 @@ class DokumenMutuController extends Controller
     public function store(Request $request, DocumentNumberingService $numbering)
     {
         $validated = $request->validate([
-            'kategori_dokumen_id' => 'required|exists:kategori_dokusens,id',
+            'kategori_dokumen_id' => 'required|exists:kategori_dokumen,id',
             'judul' => 'required|string|max:255',
-            'program_studi_id' => 'nullable|exists:program_studis,id',
-            'unit_kerja_id' => 'nullable|exists:unit_kerjas,id',
-            'standar_mutu_id' => 'nullable|exists:standar_mutus,id',
+            'program_studi_id' => 'nullable|exists:program_studi,id',
+            'unit_kerja_id' => 'nullable|exists:unit_kerja,id',
+            'standar_mutu_id' => 'nullable|exists:standar_mutu,id',
         ]);
 
         $kategori = KategoriDokumen::findOrFail($validated['kategori_dokumen_id']);
@@ -100,11 +100,11 @@ class DokumenMutuController extends Controller
     public function update(Request $request, DokumenMutu $dokumen)
     {
         $validated = $request->validate([
-            'kategori_dokumen_id' => 'required|exists:kategori_dokusens,id',
+            'kategori_dokumen_id' => 'required|exists:kategori_dokumen,id',
             'judul' => 'required|string|max:255',
-            'program_studi_id' => 'nullable|exists:program_studis,id',
-            'unit_kerja_id' => 'nullable|exists:unit_kerjas,id',
-            'standar_mutu_id' => 'nullable|exists:standar_mutus,id',
+            'program_studi_id' => 'nullable|exists:program_studi,id',
+            'unit_kerja_id' => 'nullable|exists:unit_kerja,id',
+            'standar_mutu_id' => 'nullable|exists:standar_mutu,id',
         ]);
 
         $dokumen->update($validated);

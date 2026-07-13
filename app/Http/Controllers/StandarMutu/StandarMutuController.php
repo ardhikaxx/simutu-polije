@@ -47,8 +47,8 @@ class StandarMutuController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kategori_standar_id' => 'required|exists:kategori_standars,id',
-            'kode_standar' => 'required|string|max:20|unique:standar_mutus,kode_standar',
+            'kategori_standar_id' => 'required|exists:kategori_standar,id',
+            'kode_standar' => 'required|string|max:20|unique:standar_mutu,kode_standar',
             'nama_standar' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'dasar_hukum' => 'nullable|string|max:255',
@@ -90,8 +90,8 @@ class StandarMutuController extends Controller
     public function update(Request $request, StandarMutu $standar)
     {
         $validated = $request->validate([
-            'kategori_standar_id' => 'required|exists:kategori_standars,id',
-            'kode_standar' => 'required|string|max:20|unique:standar_mutus,kode_standar,' . $standar->id,
+            'kategori_standar_id' => 'required|exists:kategori_standar,id',
+            'kode_standar' => 'required|string|max:20|unique:standar_mutu,kode_standar,' . $standar->id,
             'nama_standar' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'dasar_hukum' => 'nullable|string|max:255',
