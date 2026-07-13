@@ -61,7 +61,7 @@ class JadwalAuditController extends Controller
     public function show(JadwalAudit $jadwal)
     {
         $jadwal->load(['periodeAudit', 'programStudi', 'unitKerja', 'dibuatOleh', 'timAudit.user', 'hasilAudit']);
-        $users = User::orderBy('nama')->get();
+        $users = User::whereHas('roles', fn ($q) => $q->whereIn('name', ['admin_spmi', 'gpm', 'auditor', 'auditor_ketua', 'kajur', 'kaprodi']))->orderBy('nama')->get();
 
         return view('audit.show', compact('jadwal', 'users'));
     }
