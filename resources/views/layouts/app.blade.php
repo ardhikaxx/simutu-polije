@@ -22,7 +22,7 @@
             <div class="sidebar-header">
                 <a href="{{ route('dashboard') }}" class="sidebar-brand">
                     <span class="sidebar-brand-icon">
-                        <i class="fas fa-shield-halved"></i>
+                        <img src="{{ asset('assets/logo-polije.png') }}" alt="Logo Polije" height="36" style="object-fit:contain;">
                     </span>
                     <span class="sidebar-brand-text">SIMUTU</span>
                 </a>
@@ -218,7 +218,7 @@
 
                     <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item me-2">
-                            <a href="{{ route('notifications.index') }}" class="btn btn-link topbar-btn position-relative" title="Notifikasi">
+                            <a href="{{ route('notifikasi.index') }}" class="btn btn-link topbar-btn position-relative" title="Notifikasi">
                                 <i class="fas fa-bell"></i>
                                 @php $unreadCount = auth()->user()->unreadNotifications->count(); @endphp
                                 @if($unreadCount > 0)
