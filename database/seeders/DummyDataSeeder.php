@@ -79,9 +79,8 @@ class DummyDataSeeder extends Seeder
         foreach ($items as $index => $itemText) {
             $checklistItems[] = ChecklistAuditItem::create([
                 'checklist_audit_template_id' => $template->id,
-                'teks_item' => $itemText,
-                'skor_maksimal' => 10,
-                'urutan' => $index + 1,
+                'pertanyaan' => $itemText,
+                'bobot_skor' => 10,
             ]);
         }
 
@@ -270,11 +269,11 @@ class DummyDataSeeder extends Seeder
         ]);
 
         $pertanyaanData = [
-            ['teks' => 'Bagaimana kepuasan Anda terhadap kualitas pengajaran dosen?', 'tipe' => 'rating'],
-            ['teks' => 'Bagaimana kepuasan Anda terhadap fasilitas laboratorium?', 'tipe' => 'rating'],
-            ['teks' => 'Bagaimana kepuasan Anda terhadap layanan administrasi?', 'tipe' => 'rating'],
-            ['teks' => 'Bagaimana kepuasan Anda terhadap perpustakaan?', 'tipe' => 'rating'],
-            ['teks' => 'Saran dan masukan untuk peningkatan mutu?', 'tipe' => 'teks'],
+            ['teks' => 'Bagaimana kepuasan Anda terhadap kualitas pengajaran dosen?', 'tipe' => 'skala_likert'],
+            ['teks' => 'Bagaimana kepuasan Anda terhadap fasilitas laboratorium?', 'tipe' => 'skala_likert'],
+            ['teks' => 'Bagaimana kepuasan Anda terhadap layanan administrasi?', 'tipe' => 'skala_likert'],
+            ['teks' => 'Bagaimana kepuasan Anda terhadap perpustakaan?', 'tipe' => 'skala_likert'],
+            ['teks' => 'Saran dan masukan untuk peningkatan mutu?', 'tipe' => 'esai'],
         ];
 
         $pertanyaanIds = [];
@@ -297,8 +296,8 @@ class DummyDataSeeder extends Seeder
                     'survei_id' => $survei->id,
                     'pertanyaan_survei_id' => $pId,
                     'responden_id' => $mhs->id,
-                    'nilai_jawaban' => $pertanyaan->tipe_jawaban === 'rating' ? rand(3, 5) : null,
-                    'teks_jawaban' => $pertanyaan->tipe_jawaban === 'teks' ? 'Semoga kualitas terus ditingkatkan.' : null,
+                    'nilai_jawaban' => $pertanyaan->tipe_jawaban === 'skala_likert' ? rand(3, 5) : null,
+                    'teks_jawaban' => $pertanyaan->tipe_jawaban === 'esai' ? 'Semoga kualitas terus ditingkatkan.' : null,
                 ]);
             }
         }
