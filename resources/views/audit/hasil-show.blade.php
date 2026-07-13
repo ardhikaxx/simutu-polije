@@ -49,9 +49,9 @@
                             @foreach($hasil->hasilAuditDetails as $idx => $detail)
                             <tr>
                                 <td>{{ $idx + 1 }}</td>
-                                <td>{{ $detail->checklistAuditItem->nama_item ?? '-' }}</td>
-                                <td><span class="fw-bold {{ $detail->skor >= 80 ? 'text-success' : ($detail->skor >= 60 ? 'text-warning' : 'text-danger') }}">{{ $detail->skor }}</span></td>
-                                <td>{{ $detail->catatan ?? '-' }}</td>
+                                <td>{{ $detail->checklistAuditItem->pertanyaan ?? '-' }}</td>
+                                <td><span class="fw-bold {{ ($detail->skor_diberikan ?? 0) >= 80 ? 'text-success' : (($detail->skor_diberikan ?? 0) >= 60 ? 'text-warning' : 'text-danger') }}">{{ $detail->skor_diberikan ?? '-' }}</span></td>
+                                <td>{{ $detail->catatan_auditor ?? '-' }}</td>
                             </tr>
                             @endforeach
                         </tbody>

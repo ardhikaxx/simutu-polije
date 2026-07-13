@@ -55,7 +55,7 @@
                         <td>{{ $idx + 1 }}</td>
                         <td class="fw-semibold">{{ $survei->judul }}</td>
                         <td><span class="badge bg-info">{{ $survei->jenisSurvei->nama ?? '-' }}</span></td>
-                        <td>{{ $survei->jawabanSurvei->unique('diisi_oleh')->count() }}</td>
+                        <td>{{ $survei->jawabanSurvei->unique('responden_id')->count() }}</td>
                         <td><span class="badge bg-{{ $survei->status === 'Aktif' ? 'success' : 'secondary' }}">{{ $survei->status }}</span></td>
                         <td><a href="{{ route('survei.hasil', $survei) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-chart-bar"></i></a></td>
                     </tr>

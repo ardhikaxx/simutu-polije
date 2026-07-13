@@ -90,9 +90,9 @@ $('#templateSelect').on('change', function() {
             tbody.append(`
                 <tr>
                     <td>${idx + 1}</td>
-                    <td class="fw-semibold">${item.nama_item || item.nama || '-'}</td>
-                    <td><input type="number" name="items[${idx}][skor]" class="form-control form-control-sm" min="0" max="100" required></td>
-                    <td><input type="text" name="items[${idx}][catatan]" class="form-control form-control-sm"></td>
+                    <td class="fw-semibold">${item.pertanyaan || item.nama_item || '-'}</td>
+                    <td><input type="number" name="items[${idx}][skor_diberikan]" class="form-control form-control-sm" min="0" max="100" required></td>
+                    <td><input type="text" name="items[${idx}][catatan_auditor]" class="form-control form-control-sm"></td>
                     <input type="hidden" name="items[${idx}][checklist_item_id]" value="${item.id}">
                 </tr>
             `);
