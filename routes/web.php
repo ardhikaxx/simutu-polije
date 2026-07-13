@@ -95,7 +95,7 @@ Route::middleware(['auth'])->group(function () {
         })->name('admin.settings.index');
     });
 
-    Route::middleware('role:super_admin|admin_spmi')->prefix('master-data')->group(function () {
+    Route::middleware('role:super_admin|admin_spmi')->prefix('master-data')->name('master-data.')->group(function () {
         Route::resource('jurusan', JurusanController::class)->except(['show']);
         Route::resource('prodi', ProgramStudiController::class)->except(['show']);
         Route::resource('unit-kerja', UnitKerjaController::class)->except(['show']);
