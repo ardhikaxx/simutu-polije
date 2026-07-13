@@ -40,7 +40,7 @@
                     <label for="jenjang" class="form-label">Jenjang <span class="text-danger">*</span></label>
                     <select class="form-select @error('jenjang') is-invalid @enderror" id="jenjang" name="jenjang" required>
                         <option value="">-- Pilih Jenjang --</option>
-                        @foreach(['D3', 'S1', 'S2', 'S3'] as $j)
+                        @foreach(['D3', 'D4', 'S2Terapan'] as $j)
                         <option value="{{ $j }}" {{ old('jenjang', $prodi->jenjang) == $j ? 'selected' : '' }}>{{ $j }}</option>
                         @endforeach
                     </select>

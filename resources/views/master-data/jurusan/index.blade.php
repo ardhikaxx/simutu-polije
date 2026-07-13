@@ -42,8 +42,8 @@
                             <span class="badge bg-info rounded-pill">{{ $jurusan->program_studi_count }} Prodi</span>
                         </td>
                         <td>
-                            <span class="badge bg-{{ $jurusan->status === 'Aktif' ? 'success' : 'secondary' }}">
-                                {{ $jurusan->status ?? 'Aktif' }}
+                            <span class="badge bg-{{ ($jurusan->status ?? 'aktif') === 'aktif' ? 'success' : 'secondary' }}">
+                                {{ ucfirst($jurusan->status ?? 'aktif') }}
                             </span>
                         </td>
                         <td>

@@ -40,9 +40,8 @@
                     <select class="form-select @error('jenjang') is-invalid @enderror" id="jenjang" name="jenjang" required>
                         <option value="">-- Pilih Jenjang --</option>
                         <option value="D3" {{ old('jenjang') == 'D3' ? 'selected' : '' }}>D3</option>
-                        <option value="S1" {{ old('jenjang') == 'S1' ? 'selected' : '' }}>S1</option>
-                        <option value="S2" {{ old('jenjang') == 'S2' ? 'selected' : '' }}>S2</option>
-                        <option value="S3" {{ old('jenjang') == 'S3' ? 'selected' : '' }}>S3</option>
+                        <option value="D4" {{ old('jenjang') == 'D4' ? 'selected' : '' }}>D4</option>
+                        <option value="S2Terapan" {{ old('jenjang') == 'S2Terapan' ? 'selected' : '' }}>S2 Terapan</option>
                     </select>
                     @error('jenjang')
                     <div class="invalid-feedback">{{ $message }}</div>

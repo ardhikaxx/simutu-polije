@@ -33,8 +33,9 @@
                     <label for="jenis" class="form-label">Jenis <span class="text-danger">*</span></label>
                     <select class="form-select @error('jenis') is-invalid @enderror" id="jenis" name="jenis" required>
                         <option value="">-- Pilih Jenis --</option>
-                        <option value="Unit Kerja" {{ old('jenis') == 'Unit Kerja' ? 'selected' : '' }}>Unit Kerja</option>
-                        <option value="Fungsional" {{ old('jenis') == 'Fungsional' ? 'selected' : '' }}>Fungsional</option>
+                        <option value="Akademik" {{ old('jenis') == 'Akademik' ? 'selected' : '' }}>Akademik</option>
+                        <option value="Non-Akademik" {{ old('jenis') == 'Non-Akademik' ? 'selected' : '' }}>Non-Akademik</option>
+                        <option value="Penunjang" {{ old('jenis') == 'Penunjang' ? 'selected' : '' }}>Penunjang</option>
                     </select>
                     @error('jenis')
                     <div class="invalid-feedback">{{ $message }}</div>

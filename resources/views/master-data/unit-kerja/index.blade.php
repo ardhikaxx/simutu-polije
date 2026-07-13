@@ -38,8 +38,8 @@
                         <td class="fw-semibold">{{ $unit->nama_unit }}</td>
                         <td><span class="badge bg-info">{{ $unit->jenis }}</span></td>
                         <td>
-                            <span class="badge bg-{{ $unit->status === 'Aktif' ? 'success' : 'secondary' }}">
-                                {{ $unit->status ?? 'Aktif' }}
+                            <span class="badge bg-{{ ($unit->status ?? 'aktif') === 'aktif' ? 'success' : 'secondary' }}">
+                                {{ ucfirst($unit->status ?? 'aktif') }}
                             </span>
                         </td>
                         <td>

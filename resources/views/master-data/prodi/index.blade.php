@@ -42,8 +42,8 @@
                         <td><span class="badge bg-primary">{{ $prodi->jenjang }}</span></td>
                         <td>{{ $prodi->jurusan->nama_jurusan ?? '-' }}</td>
                         <td>
-                            <span class="badge bg-{{ $prodi->status === 'Aktif' ? 'success' : 'secondary' }}">
-                                {{ $prodi->status ?? 'Aktif' }}
+                            <span class="badge bg-{{ ($prodi->status ?? 'aktif') === 'aktif' ? 'success' : 'secondary' }}">
+                                {{ ucfirst($prodi->status ?? 'aktif') }}
                             </span>
                         </td>
                         <td>
