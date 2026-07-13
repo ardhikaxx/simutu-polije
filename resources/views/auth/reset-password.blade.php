@@ -19,7 +19,7 @@
 <body>
     <div class="card card-reset">
         <div class="card-header-custom">
-            <i class="fas fa-key fa-2x mb-2" style="color:#1a237e;"></i>
+            <img src="{{ asset('assets/logo-polije.png') }}" alt="Logo Polije" style="height:56px;object-fit:contain;" class="mb-2">
             <div class="logo-text">SIMUTU POLIJE</div>
             <small class="text-muted">Sistem Informasi Penjaminan Mutu</small>
         </div>

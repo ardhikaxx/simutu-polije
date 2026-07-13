@@ -137,7 +137,7 @@
         <div class="register-card">
             <div class="register-header">
                 <div class="register-logo">
-                    <i class="fas fa-shield-halved"></i>
+                    <img src="{{ asset('assets/logo-polije.png') }}" alt="Logo Polije" style="width:48px;height:48px;object-fit:contain;">
                 </div>
                 <h1>SIMUTU POLIJE</h1>
                 <p>Daftar Akun Baru</p>
