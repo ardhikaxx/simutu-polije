@@ -51,15 +51,15 @@ class HasilAuditController extends Controller
     public function submitChecklist(Request $request, JadwalAudit $jadwal)
     {
         $validated = $request->validate([
-            'checklist_audit_template_id' => 'required|exists:checklist_audit_templates,id',
+            'checklist_audit_template_id' => 'required|exists:checklist_audit_template,id',
             'items' => 'required|array',
-            'items.*.checklist_item_id' => 'required|exists:checklist_audit_items,id',
-            'items.*.skor' => 'required|numeric|min:0|max:100',
-            'items.*.catatan' => 'nullable|string',
+            'items.*.checklist_item_id' => 'required|exists:checklist_audit_item,id',
+            'items.*.skor_diberikan' => 'required|numeric|min:0|max:100',
+            'items.*.catatan_auditor' => 'nullable|string',
             'kesimpulan' => 'nullable|string',
         ]);
 
-        $totalSkor = collect($validated['items'])->avg('skor');
+        $totalSkor = collect($validated['items'])->avg('skor_diberikan');
 
         $hasil = HasilAudit::create([
             'jadwal_audit_id' => $jadwal->id,
@@ -73,8 +73,8 @@ class HasilAuditController extends Controller
             HasilAuditDetail::create([
                 'hasil_audit_id' => $hasil->id,
                 'checklist_audit_item_id' => $item['checklist_item_id'],
-                'skor' => $item['skor'],
-                'catatan' => $item['catatan'] ?? null,
+                'skor_diberikan' => $item['skor_diberikan'],
+                'catatan_auditor' => $item['catatan_auditor'] ?? null,
             ]);
         }
 

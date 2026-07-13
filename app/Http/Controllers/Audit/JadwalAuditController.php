@@ -43,8 +43,8 @@ class JadwalAuditController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'periode_audit_id' => 'required|exists:periode_audits,id',
-            'program_studi_id' => 'required|exists:program_studis,id',
+            'periode_audit_id' => 'required|exists:periode_audit,id',
+            'program_studi_id' => 'required|exists:program_studi,id',
             'tanggal_audit' => 'required|date',
             'jenis_audit' => 'required|in:Internal,Eksternal,Self Assessment',
         ]);
@@ -68,8 +68,8 @@ class JadwalAuditController extends Controller
     public function update(Request $request, JadwalAudit $jadwal)
     {
         $validated = $request->validate([
-            'periode_audit_id' => 'required|exists:periode_audits,id',
-            'program_studi_id' => 'required|exists:program_studis,id',
+            'periode_audit_id' => 'required|exists:periode_audit,id',
+            'program_studi_id' => 'required|exists:program_studi,id',
             'tanggal_audit' => 'required|date',
             'jenis_audit' => 'required|in:Internal,Eksternal,Self Assessment',
             'status' => 'required|in:Terjadwal,Berlangsung,Selesai,Dibatalkan',
