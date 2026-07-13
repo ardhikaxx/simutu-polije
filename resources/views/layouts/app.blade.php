@@ -138,7 +138,7 @@
 
                 @if(auth()->user()->hasAnyRole(['super_admin', 'admin_spmi', 'auditor', 'auditor_ketua']))
                 <li class="nav-item">
-                    <a href="{{ route('audit.index') }}" class="nav-link {{ request()->routeIs('audit.*') ? 'active' : '' }}">
+                    <a href="{{ route('audit.index') }}" class="nav-link {{ request()->routeIs('audit.*', 'jadwal-audit.*') ? 'active' : '' }}">
                         <i class="fas fa-clipboard-check"></i>
                         <span>Audit Mutu</span>
                     </a>

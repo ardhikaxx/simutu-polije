@@ -108,7 +108,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware('role:super_admin|admin_spmi|kajur|kaprodi|gpm|auditor|auditor_ketua|dosen|tendik|pimpinan')->group(function () {
-        Route::resource('standar-mutu', StandarMutuController::class)->parameters(['standar-mutu' => 'standar']);
+        Route::resource('standar-mutu', StandarMutuController::class);
         Route::post('standar-mutu/{standar}/submit', [StandarMutuController::class, 'submit'])->name('standar-mutu.submit');
         Route::post('standar-mutu/{standar}/review', [StandarMutuController::class, 'review'])->name('standar-mutu.review');
         Route::post('standar-mutu/{standar}/approve', [StandarMutuController::class, 'approve'])->name('standar-mutu.approve');
@@ -118,7 +118,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('standar-mutu/{standar}/indikator/{indikator}', [IndikatorMutuController::class, 'update'])->name('standar-mutu.indikator.update');
         Route::delete('standar-mutu/{standar}/indikator/{indikator}', [IndikatorMutuController::class, 'destroy'])->name('standar-mutu.indikator.destroy');
 
-        Route::resource('dokumen-mutu', DokumenMutuController::class)->parameters(['dokumen-mutu' => 'dokumen']);
+        Route::resource('dokumen-mutu', DokumenMutuController::class);
         Route::post('dokumen-mutu/{dokumen}/submit', [DokumenMutuController::class, 'submit'])->name('dokumen-mutu.submit');
         Route::post('dokumen-mutu/{dokumen}/review', [DokumenMutuController::class, 'review'])->name('dokumen-mutu.review');
         Route::post('dokumen-mutu/{dokumen}/approve', [DokumenMutuController::class, 'approve'])->name('dokumen-mutu.approve');
@@ -141,7 +141,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('audit/hasil/{hasil}/approve', [HasilAuditController::class, 'approve'])->name('audit.hasil.approve');
         Route::post('audit/temuan', [TemuanAuditController::class, 'store'])->name('audit.temuan.store');
         Route::put('audit/temuan/{temuan}', [TemuanAuditController::class, 'update'])->name('audit.temuan.update');
-        Route::resource('jadwal-audit', JadwalAuditController::class)->parameters(['jadwal-audit' => 'jadwal'])->except(['edit', 'update']);
+        Route::resource('jadwal-audit', JadwalAuditController::class)->except(['edit', 'update']);
         Route::post('jadwal-audit/{jadwal}/assign-team', [JadwalAuditController::class, 'assignTeam'])->name('jadwal-audit.assign-team');
         Route::get('audit', function () {
             return redirect()->route('jadwal-audit.index');
@@ -149,7 +149,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware('role:super_admin|admin_spmi|kajur|kaprodi|gpm|auditor|auditor_ketua')->group(function () {
-        Route::resource('tindak-lanjut', TindakLanjutController::class)->parameters(['tindak-lanjut' => 'tl'])->only(['index', 'show']);
+        Route::resource('tindak-lanjut', TindakLanjutController::class)->only(['index', 'show']);
         Route::post('tindak-lanjut/{tl}/progress', [TindakLanjutController::class, 'updateProgress'])->name('tindak-lanjut.progress.update');
         Route::post('tindak-lanjut/progress/{progress}/verify', [TindakLanjutController::class, 'verify'])->name('tindak-lanjut.progress.verify');
     });

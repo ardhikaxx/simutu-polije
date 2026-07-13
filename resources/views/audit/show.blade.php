@@ -119,6 +119,9 @@
                                 <label class="form-label small">Anggota Tim</label>
                                 <select name="user_ids[]" class="form-select" required>
                                     <option value="">-- Pilih User --</option>
+                                    @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->nama }} ({{ $user->getRoleNames()->first() ?? '-' }})</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -146,7 +149,8 @@
 <script>
 $('#addRow').on('click', function() {
     var row = $('.team-row:first').clone();
-    row.find('select, input').val('');
+    row.find('select').val('');
+    row.find('input').val('');
     $('#team-entries').append(row);
 });
 $(document).on('click', '.remove-row', function() { $(this).closest('.team-row').remove(); });
