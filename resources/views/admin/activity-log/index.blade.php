@@ -18,7 +18,7 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         @php
-            $logs = Spatie\Activitylog\Models\Activity::with('causer')->latest()->paginate(20);
+            $logs = Spatie\Activitylog\Models\Activity::with('causer')->latest()->get();
         @endphp
         <div class="table-responsive">
             <table class="table table-striped table-bordered align-middle" id="dataTable">
@@ -36,7 +36,7 @@
                 <tbody>
                     @forelse($logs as $index => $log)
                     <tr>
-                        <td>{{ ($logs->currentPage() - 1) * $logs->perPage() + $index + 1 }}</td>
+                        <td>{{ $index + 1 }}</td>
                         <td>
                             <span title="{{ $log->created_at->format('d M Y H:i') }}">
                                 {{ $log->created_at->diffForHumans() }}
@@ -81,9 +81,6 @@
             </table>
         </div>
 
-        <div class="d-flex justify-content-end mt-3">
-            {{ $logs->links() }}
-        </div>
     </div>
 </div>
 @endsection
@@ -93,9 +90,7 @@
 $(document).ready(function() {
     $('#dataTable').DataTable({
         language: { url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json' },
-        order: [[1, 'desc']],
-        paging: false,
-        info: false
+        order: [[1, 'desc']]
     });
 });
 </script>
