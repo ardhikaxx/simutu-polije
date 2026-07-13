@@ -1,0 +1,92 @@
+@extends('layouts.app')
+
+@section('title', 'Manajemen User - SIMUTU POLIJE')
+
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="mb-1 fw-bold">Manajemen User</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 small">
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+                <li class="breadcrumb-item active">Manajemen User</li>
+            </ol>
+        </nav>
+    </div>
+    <a href="#" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i>Tambah User
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body">
+        @php
+            $users = App\Models\User::with('jurusan','programStudi','unitKerja')->latest()->get();
+        @endphp
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle" id="dataTable">
+                <thead class="table-light">
+                    <tr>
+                        <th width="50">No</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>NIP/NIM</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th width="150">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($users as $index => $user)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td class="fw-semibold">{{ $user->nama }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td><code>{{ $user->nip_nim ?? '-' }}</code></td>
+                        <td>
+                            <span class="badge bg-primary rounded-pill">
+                                {{ $user->getRoleNames()->first() ?? '-' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge bg-{{ $user->status === 'active' ? 'success' : 'danger' }}">
+                                {{ $user->status ?? '-' }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-outline-primary" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="#" method="POST" class="d-inline delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            <i class="fas fa-users fa-2x mb-2 d-block"></i>
+                            Belum ada data user.
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $('#dataTable').DataTable({
+        language: { url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json' }
+    });
+});
+</script>
+@endpush
