@@ -29,7 +29,7 @@
                 <table class="table table-borderless mb-0">
                     <tr><td class="text-muted" style="width:180px">Program Studi</td><td class="fw-semibold">{{ $jadwal->programStudi->nama_prodi ?? '-' }}</td></tr>
                     <tr><td class="text-muted">Periode Audit</td><td>{{ $jadwal->periodeAudit->nama ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Tanggal Audit</td><td>{{ $jadwal->tanggal_audit->format('d/m/Y') }}</td></tr>
+                    <tr><td class="text-muted">Tanggal Audit</td><td>{{ $jadwal->tanggal_audit ? $jadwal->tanggal_audit->format('d/m/Y') : '-' }}</td></tr>
                     <tr><td class="text-muted">Jenis Audit</td><td><span class="badge bg-info">{{ $jadwal->jenis_audit }}</span></td></tr>
                     <tr><td class="text-muted">Dibuat Oleh</td><td>{{ $jadwal->dibuatOleh->nama ?? '-' }}</td></tr>
                 </table>
