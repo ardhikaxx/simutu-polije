@@ -25,13 +25,9 @@
     <div class="col-lg-4 mb-4">
         <div class="card border-0 shadow-sm">
             <div class="card-body text-center py-4">
-                @if($user->foto_profil)
-                    <img src="{{ asset('storage/' . $user->foto_profil) }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover;">
-                @else
-                    <div class="avatar-placeholder-lg rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:100px;height:100px;background:#1a237e;color:#fff;font-weight:700;font-size:2.5rem;">
-                        {{ strtoupper(substr($user->nama, 0, 1)) }}
-                    </div>
-                @endif
+                <div class="avatar-placeholder-lg rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:100px;height:100px;background:#1a237e;color:#fff;font-weight:700;font-size:2.5rem;">
+                    {{ strtoupper(substr($user->nama, 0, 1)) }}
+                </div>
                 <h5 class="fw-bold mb-1">{{ $user->nama }}</h5>
                 <span class="badge bg-primary">{{ ucfirst(str_replace('_', ' ', $user->getRoleNames()->first() ?? '')) }}</span>
             </div>

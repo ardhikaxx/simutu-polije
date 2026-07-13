@@ -21,14 +21,9 @@
     <div class="col-lg-4 mb-4">
         <div class="card border-0 shadow-sm">
             <div class="card-body text-center py-4">
-                @if($user->foto_profil)
-                    <img src="{{ asset('storage/' . $user->foto_profil) }}" alt="Foto Profil" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover;" id="preview">
-                @else
-                    <div class="avatar-placeholder-lg rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:100px;height:100px;background:#1a237e;color:#fff;font-weight:700;font-size:2.5rem;" id="preview-placeholder">
-                        {{ strtoupper(substr($user->nama, 0, 1)) }}
-                    </div>
-                    <img src="" alt="Preview" class="rounded-circle mb-3 d-none" width="100" height="100" style="object-fit:cover;" id="preview">
-                @endif
+                <div class="avatar-placeholder-lg rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:100px;height:100px;background:#1a237e;color:#fff;font-weight:700;font-size:2.5rem;">
+                    {{ strtoupper(substr($user->nama, 0, 1)) }}
+                </div>
                 <h5 class="fw-bold mb-1">{{ $user->nama }}</h5>
                 <span class="badge bg-primary">{{ ucfirst(str_replace('_', ' ', $user->getRoleNames()->first() ?? '')) }}</span>
             </div>
@@ -39,7 +34,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white"><h6 class="mb-0 fw-bold">Form Edit Profil</h6></div>
             <div class="card-body">
-                <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('profile.update') }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -56,12 +51,6 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">NIP / NIM</label>
                             <input type="text" name="nip_nim" class="form-control" value="{{ old('nip_nim', $user->nip_nim) }}">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Foto Profil</label>
-                            <input type="file" name="foto_profil" class="form-control @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)">
-                            <small class="text-muted">Maks 2MB. Format: JPG, PNG.</small>
-                            @error('foto_profil') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Jurusan</label>
@@ -103,19 +92,6 @@
 @endsection
 
 @push('scripts')
-<script>
-function previewImage(event) {
-    const reader = new FileReader();
-    reader.onload = function() {
-        let preview = document.getElementById('preview');
-        let placeholder = document.getElementById('preview-placeholder');
-        preview.src = reader.result;
-        preview.classList.remove('d-none');
-        if (placeholder) placeholder.classList.add('d-none');
-    };
-    reader.readAsDataURL(event.target.files[0]);
-}
-</script>
 @if(session('success'))
 <script>Swal.fire({ icon: 'success', title: 'Berhasil', text: '{{ session("success") }}', timer: 3000, showConfirmButton: false });</script>
 @endif

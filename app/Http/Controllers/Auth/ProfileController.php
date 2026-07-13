@@ -38,15 +38,7 @@ class ProfileController extends Controller
             'jurusan_id' => 'nullable|exists:fakultas_jurusan,id',
             'program_studi_id' => 'nullable|exists:program_studi,id',
             'unit_kerja_id' => 'nullable|exists:unit_kerja,id',
-            'foto_profil' => 'nullable|image|max:2048',
         ]);
-
-        if ($request->hasFile('foto_profil')) {
-            if ($user->foto_profil) {
-                \Storage::disk('public')->delete($user->foto_profil);
-            }
-            $validated['foto_profil'] = $request->file('foto_profil')->store('foto-profil', 'public');
-        }
 
         $user->update($validated);
 

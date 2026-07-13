@@ -36,7 +36,6 @@ class User extends Authenticatable
         'program_studi_id',
         'unit_kerja_id',
         'status',
-        'foto_profil',
         'last_login_at',
     ];
 

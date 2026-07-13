@@ -34,13 +34,9 @@
             <div class="sidebar-user px-3 py-3">
                 <div class="d-flex align-items-center">
                     <div class="user-avatar me-2">
-                        @if(auth()->user()->foto_profil)
-                            <img src="{{ asset('storage/' . auth()->user()->foto_profil) }}" alt="Avatar" class="rounded-circle" width="40" height="40">
-                        @else
-                            <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;background:rgba(255,255,255,0.2);color:#fff;font-weight:600;font-size:14px;">
-                                {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
-                            </div>
-                        @endif
+                        <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;background:rgba(255,255,255,0.2);color:#fff;font-weight:600;font-size:14px;">
+                            {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
+                        </div>
                     </div>
                     <div class="user-info overflow-hidden">
                         <div class="text-white fw-semibold text-truncate" style="font-size:0.85rem;">{{ auth()->user()->nama }}</div>
@@ -236,13 +232,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center topbar-user" href="#" role="button" data-bs-toggle="dropdown">
                                 <div class="user-avatar-sm me-2">
-                                    @if(auth()->user()->foto_profil)
-                                        <img src="{{ asset('storage/' . auth()->user()->foto_profil) }}" alt="Avatar" class="rounded-circle" width="32" height="32">
-                                    @else
-                                        <div class="avatar-placeholder-sm rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;background:#1a237e;color:#fff;font-weight:600;font-size:12px;">
-                                            {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
-                                        </div>
-                                    @endif
+                                    <div class="avatar-placeholder-sm rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;background:#1a237e;color:#fff;font-weight:600;font-size:12px;">
+                                        {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
+                                    </div>
                                 </div>
                                 <span class="d-none d-md-inline text-dark" style="font-size:0.85rem;">{{ auth()->user()->nama }}</span>
                             </a>
