@@ -70,10 +70,23 @@ body {
     margin-right: 0.6rem;
 }
 
+.sidebar-brand-text-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .sidebar-brand-text {
     font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: 1px;
+}
+
+.sidebar-brand-subtitle {
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.1;
+    letter-spacing: 0.3px;
+    width: 100%;
 }
 
 .sidebar-close {

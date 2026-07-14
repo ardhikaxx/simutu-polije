@@ -24,8 +24,10 @@
                     <span class="sidebar-brand-icon">
                         <img src="{{ asset('assets/logo-polije.png') }}" alt="Logo Polije" height="36" style="object-fit:contain;">
                     </span>
-                    <span class="sidebar-brand-text">SIMUTU</span>
-                    <small class="d-block text-white-50" style="font-size:0.6rem;line-height:1.1;">Sistem Informasi Penjaminan Mutu</small>
+                    <div class="sidebar-brand-text-group">
+                        <span class="sidebar-brand-text">SIMUTU</span>
+                        <div class="sidebar-brand-subtitle">Sistem Informasi Penjaminan Mutu</div>
+                    </div>
                 </a>
                 <button id="sidebarClose" class="sidebar-close d-lg-none">
                     <i class="fas fa-times"></i>
