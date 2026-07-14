@@ -103,6 +103,37 @@ Sistem informasi berbasis web untuk mengelola seluruh siklus penjaminan mutu pen
 - Laporan hasil audit
 - Laporan PPEPP per siklus
 - Export ke **PDF** dan **Excel**
+- **Export Semua Data** (seluruh standar + capaian sekaligus)
+
+### Template Dokumen Mutu
+- Koleksi **13 template PDF** per standar mutu
+- Filter by standar + pencarian
+- Download template dengan panduan pengisian
+- Hitungan download counter
+
+### Dashboard Interaktif
+- **Dashboard Super Admin**: Line chart tren capaian, radar chart per standar, doughnut PPEPP, bar chart tindak lanjut (data real dari DB)
+- **Dashboard Pimpinan (Executive Summary)**: Radar capaian vs target, tren 3 tahun, alert merah untuk standar di bawah target, ringkasan eksekutif
+- Semua chart menggunakan data real dari database
+
+### Riwayat Revisi Dokumen
+- Timeline visual perubahan versi dokumen
+- Form tambah revisi baru dengan catatan
+- Versi otomatis naik 0.1
+- Tracking siapa, kapan, dan apa yang berubah
+
+### Tracking Aktivitas User
+- Timeline aktivitas seluruh user di sistem
+- Filter by user + pencarian
+- Detail modul yang diakses dan data yang diubah
+
+### Konfirmasi Sebelum Aksi
+- SweetAlert2 otomatis untuk submit, review, approve, publish, delete, revisi
+- Mencegah kesalahan klik pada aksi penting
+
+### Shortcut Akses Cepat
+- Tombol shortcut di dashboard untuk akses halaman sering diakses
+- Standar baru, dokumen baru, template, jadwal audit, tindak lanjut, laporan, kelola user, aktivitas
 
 ### Notifikasi
 - Notifikasi real-time untuk tugas yang menunggu
@@ -121,19 +152,20 @@ Sistem informasi berbasis web untuk mengelola seluruh siklus penjaminan mutu pen
 
 | No | Modul | Deskripsi |
 |----|-------|-----------|
-| 1 | **Dashboard** | Ringkasan statistik per role (13 dashboard berbeda) |
+| 1 | **Dashboard** | Ringkasan statistik per role (13 dashboard berbeda, chart interaktif) |
 | 2 | **Master Data** | Kelola jurusan, prodi, unit kerja, tahun akademik, periode audit |
 | 3 | **Standar Mutu** | Kelola standar, indikator, target, capaian indikator |
-| 4 | **Dokumen Mutu** | Kelola dokumen pendukung dengan versioning & approval |
-| 5 | **PPEPP** | Siklus PPEPP, pelaksanaan, eviden, evaluasi |
-| 6 | **Jadwal Audit** | Penjadwalan & penugasan tim audit |
-| 7 | **Hasil Audit** | Checklist, skor, temuan audit |
-| 8 | **Tindak Lanjut** | Progress, verifikasi, tracking status temuan |
-| 9 | **Survei** | Buat, isi, dan lihat hasil survei kepuasan |
-| 10 | **Laporan** | Capaian indikator, audit, PPEPP + export |
-| 11 | **Notifikasi** | Notifikasi tugas dan aktivitas |
-| 12 | **Admin** | User, Role, Activity Log, Pengaturan |
-| 13 | **Profil** | Edit profil & ganti password |
+| 4 | **Dokumen Mutu** | Kelola dokumen pendukung dengan versioning, approval & riwayat revisi |
+| 5 | **Template Dokumen** | Download template PDF per standar mutu dengan panduan pengisian |
+| 6 | **PPEPP** | Siklus PPEPP, pelaksanaan, eviden, evaluasi |
+| 7 | **Jadwal Audit** | Penjadwalan & penugasan tim audit |
+| 8 | **Hasil Audit** | Checklist, skor, temuan audit |
+| 9 | **Tindak Lanjut** | Progress, verifikasi, tracking status temuan |
+| 10 | **Survei** | Buat, isi, dan lihat hasil survei kepuasan |
+| 11 | **Laporan** | Capaian indikator, audit, PPEPP + export PDF/Excel + export semua data |
+| 12 | **Notifikasi** | Notifikasi tugas dan aktivitas |
+| 13 | **Admin** | User, Role, Activity Log, Tracking Aktivitas, Pengaturan |
+| 14 | **Profil** | Edit profil & ganti password |
 
 ---
 
@@ -165,12 +197,14 @@ Sistem ini memiliki **13 role** dengan hak akses yang berbeda:
 | Master Data | V | V | - | - | - | - | - |
 | Standar Mutu | V | V | V | V | V | - | - |
 | Dokumen Mutu | V | V | V | V | - | - | - |
+| Template Dokumen | V | V | V | V | V | V | V |
 | PPEPP | V | V | V | V | - | - | - |
 | Jadwal Audit | V | V | V | - | V | - | - |
 | Hasil Audit | V | V | V | - | V | - | - |
 | Tindak Lanjut | V | V | V | V | V | - | - |
 | Survei | V | V | V | V | - | V | V |
 | Laporan | V | V | V | V | V | V | - |
+| Tracking Aktivitas | V | V | - | - | - | - | - |
 | Admin | V | - | - | - | - | - | - |
 
 ---

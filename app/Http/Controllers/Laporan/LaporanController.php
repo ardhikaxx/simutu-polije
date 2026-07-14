@@ -82,4 +82,12 @@ class LaporanController extends Controller
 
         return Excel::download(new IndikatorExport, $filename);
     }
+
+    public function exportAll(Request $request)
+    {
+        $taId = $request->input('tahun_akademik');
+        $filename = 'semua-data-standar-' . date('Y-m-d') . '.xlsx';
+
+        return Excel::download(new \App\Exports\Laporan\AllDataExport($taId), $filename);
+    }
 }

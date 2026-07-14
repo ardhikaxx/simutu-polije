@@ -181,6 +181,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('laporan/indikator', [LaporanController::class, 'indikator'])->name('laporan.indikator');
         Route::get('laporan/download-pdf/{type}/{id}', [LaporanController::class, 'downloadPdf'])->name('laporan.download-pdf');
         Route::get('laporan/download-excel/{type}/{id}', [LaporanController::class, 'downloadExcel'])->name('laporan.download-excel');
+        Route::get('laporan/export-all', [LaporanController::class, 'exportAll'])->name('laporan.export-all');
+
+        Route::get('aktivitas', [\App\Http\Controllers\Aktivitas\AktivitasUserController::class, 'index'])->name('aktivitas.index');
+        Route::get('aktivitas/user/{user}', [\App\Http\Controllers\Aktivitas\AktivitasUserController::class, 'user'])->name('aktivitas.user');
     });
 
     Route::get('notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');

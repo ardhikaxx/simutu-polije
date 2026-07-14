@@ -108,7 +108,64 @@ class DashboardRedirectController extends Controller
         }
 
         if ($user->hasRole('pimpinan')) {
-            return view('dashboard.pimpinan');
+            $taAktif = TahunAkademik::where('is_active', true)->first();
+
+            $stats = [
+                'totalStandar' => StandarMutu::where('status', 'Published')->count(),
+                'totalAuditSelesai' => JadwalAudit::where('status', 'Selesai')->count(),
+                'totalAuditBerjalan' => JadwalAudit::whereIn('status', ['Draft', 'Terjadwal', 'Berlangsung'])->count(),
+                'totalTemuanOpen' => \App\Models\TemuanAudit::whereHas('jadwalAudit', fn($q) => $q->where('status', '!=', 'Selesai'))->count(),
+                'totalTLOpen' => TindakLanjutTemuan::whereIn('status', ['Open', 'On Progress'])->count(),
+                'totalTLSelesai' => TindakLanjutTemuan::where('status', 'Closed')->count(),
+                'totalTL' => TindakLanjutTemuan::count(),
+                'totalDokumen' => DokumenMutu::count(),
+                'totalSurvei' => Survei::count(),
+            ];
+
+            // Trend capaian per tahun akademik (3 tahun terakhir)
+            $taList = TahunAkademik::orderBy('nama', 'desc')->take(6)->get()->reverse();
+            $chartLabels = $taList->pluck('nama')->toArray();
+            $chartCapaian = [];
+            $chartTarget = [];
+            foreach ($taList as $ta) {
+                $avgCap = CapaianIndikator::where('tahun_akademik_id', $ta->id)->avg('nilai_capaian');
+                $avgTgt = \App\Models\TargetIndikator::where('tahun_akademik_id', $ta->id)->avg('nilai_target');
+                $chartCapaian[] = $avgCap ? round($avgCap, 1) : 0;
+                $chartTarget[] = $avgTgt ? round($avgTgt, 1) : 0;
+            }
+
+            // Radar per standar
+            $radarLabels = [];
+            $radarData = [];
+            $radarTarget = [];
+            $alertRed = [];
+            if ($taAktif) {
+                $standars = StandarMutu::where('status', 'Published')->with('indikatorMutu')->get();
+                foreach ($standars as $sm) {
+                    $radarLabels[] = $sm->kode_standar;
+                    $indIds = $sm->indikatorMutu->pluck('id');
+                    $avgCap = CapaianIndikator::where('tahun_akademik_id', $taAktif->id)
+                        ->whereIn('indikator_mutu_id', $indIds)->avg('nilai_capaian');
+                    $avgTgt = \App\Models\TargetIndikator::where('tahun_akademik_id', $taAktif->id)
+                        ->whereIn('indikator_mutu_id', $indIds)->avg('nilai_target');
+                    $capVal = $avgCap ? round($avgCap, 1) : 0;
+                    $tgtVal = $avgTgt ? round($avgTgt, 1) : 0;
+                    $radarData[] = $capVal;
+                    $radarTarget[] = $tgtVal;
+                    if ($tgtVal > 0 && $capVal > 0 && $capVal < ($tgtVal * 0.7)) {
+                        $alertRed[] = "{$sm->kode_standar} ({$sm->nama_standar}): capaian {$capVal}% vs target {$tgtVal}%";
+                    }
+                }
+            }
+
+            // TL status for bar chart
+            $tlStatus = TindakLanjutTemuan::selectRaw('status, count(*) as total')
+                ->groupBy('status')->pluck('total', 'status')->toArray();
+
+            return view('dashboard.pimpinan', compact(
+                'stats', 'chartLabels', 'chartCapaian', 'chartTarget',
+                'radarLabels', 'radarData', 'radarTarget', 'alertRed', 'tlStatus'
+            ));
         }
 
         if ($user->hasRole('mahasiswa')) {

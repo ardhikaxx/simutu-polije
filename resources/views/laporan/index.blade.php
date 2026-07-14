@@ -82,6 +82,21 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-database fa-3x text-dark mb-3"></i>
+                <h5 class="fw-bold">Export Semua Data</h5>
+                <p class="text-muted small">Download seluruh data standar + capaian indikator sekaligus.</p>
+            </div>
+            <div class="card-footer bg-white">
+                <div class="d-grid gap-2">
+                    <a href="{{ route('laporan.export-all') }}" class="btn btn-sm btn-outline-success"><i class="fas fa-file-excel me-1"></i>Export Excel (Semua)</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 

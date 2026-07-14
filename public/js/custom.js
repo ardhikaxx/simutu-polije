@@ -302,5 +302,55 @@ function copyToClipboard(text) {
     }
 }
 
+/* ============================================
+   Auto Konfirmasi SweetAlert untuk Aksi Penting
+   ============================================ */
+document.addEventListener('DOMContentLoaded', function () {
+    var confirmMessages = {
+        'submit': { title: 'Submit Dokumen?', text: 'Dokumen akan dikirim untuk review.', icon: 'question' },
+        'review': { title: 'Review Dokumen?', text: 'Dokumen akan ditandai sebagai sudah direview.', icon: 'question' },
+        'approve': { title: 'Setujui Dokumen?', text: 'Dokumen akan disetujui.', icon: 'question' },
+        'publish': { title: 'Publikasikan Dokumen?', text: 'Dokumen akan dipublikasikan dan dapat diakses semua user.', icon: 'question' },
+        'delete': { title: 'Hapus Data?', text: 'Data yang dihapus tidak dapat dikembalikan!', icon: 'warning', confirmColor: '#e53935' },
+        'revisi': { title: 'Simpan Revisi?', text: 'Versi dokumen akan bertambah.', icon: 'question' },
+        'activate': { title: 'Aktifkan Tahun Akademik?', text: 'Tahun akademik lain akan dinonaktifkan.', icon: 'question' },
+        'deactivate': { title: 'Nonaktifkan Tahun Akademik?', text: 'Tahun akademik akan dinonaktifkan.', icon: 'question' },
+    };
+
+    document.querySelectorAll('form').forEach(function (form) {
+        var action = form.getAttribute('action') || '';
+        var submitBtn = form.querySelector('button[type="submit"]');
+        if (!submitBtn) return;
+
+        var matchedKey = null;
+        for (var key in confirmMessages) {
+            if (action.toLowerCase().indexOf('/' + key) !== -1 || action.toLowerCase().indexOf('/' + key + '/') !== -1) {
+                matchedKey = key;
+                break;
+            }
+        }
+        if (!matchedKey) return;
+
+        var msg = confirmMessages[matchedKey];
+        submitBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: msg.title,
+                text: msg.text,
+                icon: msg.icon,
+                showCancelButton: true,
+                confirmButtonColor: msg.confirmColor || '#1a237e',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+});
+
 /* Make SimutuAlert globally available */
 window.SimutuAlert = SimutuAlert;

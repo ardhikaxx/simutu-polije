@@ -151,6 +151,26 @@
 </div>
 
 <div class="row g-3 mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <h6 class="fw-bold mb-3" style="font-size:0.85rem;"><i class="fas fa-bolt me-2 text-warning"></i>Akses Cepat</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ route('standar-mutu.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus me-1"></i>Standar Baru</a>
+                    <a href="{{ route('dokumen-mutu.create') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-file-medical me-1"></i>Dokumen Baru</a>
+                    <a href="{{ route('template-dokumen.index') }}" class="btn btn-sm btn-outline-danger"><i class="fas fa-file-download me-1"></i>Template</a>
+                    <a href="{{ route('audit.index') }}" class="btn btn-sm btn-outline-success"><i class="fas fa-clipboard-check me-1"></i>Jadwal Audit</a>
+                    <a href="{{ route('tindak-lanjut.index') }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-tasks me-1"></i>Tindak Lanjut</a>
+                    <a href="{{ route('laporan.index') }}" class="btn btn-sm btn-outline-info"><i class="fas fa-file-export me-1"></i>Laporan</a>
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-users me-1"></i>Kelola User</a>
+                    <a href="{{ route('aktivitas.index') }}" class="btn btn-sm btn-outline-dark"><i class="fas fa-user-clock me-1"></i>Aktivitas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom-0 pt-3 pb-0">
