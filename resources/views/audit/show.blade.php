@@ -15,7 +15,7 @@
         </nav>
     </div>
     <div class="d-flex gap-2">
-        @php $sb = match($jadwal->status) { 'Terjadwal'=>'primary', 'Berlangsung'=>'warning', 'Selesai'=>'success', 'Dibatalkan'=>'danger', default=>'secondary' }; @endphp
+        @php $sb = match($jadwal->status) { 'Terjadwal'=>'primary', 'Berlangsung'=>'warning', 'Selesai'=>'success', 'Draft'=>'info', default=>'secondary' }; @endphp
         <span class="badge bg-{{ $sb }} fs-6">{{ $jadwal->status }}</span>
         <a href="{{ route('jadwal-audit.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i>Kembali</a>
     </div>
@@ -80,7 +80,7 @@
                             <span class="fw-semibold">Skor: {{ $hasil->total_skor ?? '-' }}</span>
                             <span class="text-muted small ms-2">{{ $hasil->created_at->format('d/m/Y') }}</span>
                         </div>
-                        <span class="badge bg-{{ $hasil->status === 'Disetujui' ? 'success' : 'secondary' }}">{{ $hasil->status }}</span>
+                        <span class="badge bg-{{ $hasil->status === 'Approved' ? 'success' : 'secondary' }}">{{ $hasil->status }}</span>
                     </div>
                     @endforeach
                 </div>

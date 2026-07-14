@@ -50,9 +50,8 @@
                     <label class="form-label">Jenis Audit <span class="text-danger">*</span></label>
                     <select class="form-select @error('jenis_audit') is-invalid @enderror" name="jenis_audit" required>
                         <option value="">-- Pilih Jenis --</option>
-                        <option value="Internal" {{ old('jenis_audit') == 'Internal' ? 'selected' : '' }}>Internal</option>
-                        <option value="Eksternal" {{ old('jenis_audit') == 'Eksternal' ? 'selected' : '' }}>Eksternal</option>
-                        <option value="Self Assessment" {{ old('jenis_audit') == 'Self Assessment' ? 'selected' : '' }}>Self Assessment</option>
+                        <option value="Reguler" {{ old('jenis_audit') == 'Reguler' ? 'selected' : '' }}>Reguler</option>
+                        <option value="Khusus" {{ old('jenis_audit') == 'Khusus' ? 'selected' : '' }}>Khusus</option>
                     </select>
                     @error('jenis_audit') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>

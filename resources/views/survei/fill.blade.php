@@ -28,7 +28,7 @@
                     <h6 class="fw-semibold mb-3">{{ $index + 1 }}. {{ $pertanyaan->teks_pertanyaan }}</h6>
                     <input type="hidden" name="answers[{{ $index }}][pertanyaan_survei_id]" value="{{ $pertanyaan->id }}">
 
-                    @if($pertanyaan->tipe_jawaban === 'Rating')
+                    @if($pertanyaan->tipe_jawaban === 'skala_likert')
                     <div class="rating-stars">
                         @for($i = 1; $i <= 5; $i++)
                         <div class="form-check">
@@ -37,7 +37,7 @@
                         </div>
                         @endfor
                     </div>
-                    @elseif($pertanyaan->tipe_jawaban === 'Teks')
+                    @elseif($pertanyaan->tipe_jawaban === 'esai')
                     <textarea class="form-control" name="answers[{{ $index }}][jawaban_teks]" rows="3" placeholder="Tulis jawaban Anda..."></textarea>
                     @else
                     <input type="text" class="form-control" name="answers[{{ $index }}][jawaban_teks]" placeholder="Tulis jawaban Anda...">

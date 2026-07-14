@@ -31,7 +31,7 @@
                     <tr><td class="text-muted">Penanggung Jawab</td><td>{{ $tl->penanggungJawab->nama ?? '-' }}</td></tr>
                     <tr><td class="text-muted">Target Selesai</td><td>{{ $tl->target_selesai ? $tl->target_selesai->format('d/m/Y') : '-' }}</td></tr>
                     <tr><td class="text-muted">Status</td><td>
-                        @php $sb = match($tl->status) { 'Selesai'=>'success', 'Dalam Proses'=>'warning', default=>'secondary' }; @endphp
+                        @php $sb = match($tl->status) { 'Closed'=>'success', 'Verified'=>'success', 'On Progress'=>'warning', 'Need Revision'=>'danger', default=>'secondary' }; @endphp
                         <span class="badge bg-{{ $sb }}">{{ $tl->status }}</span>
                     </td></tr>
                 </table>
@@ -42,10 +42,10 @@
             <div class="card-header bg-white"><h6 class="mb-0 fw-bold">Riwayat Progress</h6></div>
             <div class="card-body">
                 @forelse($tl->tindakLanjutProgress as $progress)
-                <div class="border-start border-3 {{ $progress->status_verifikasi === 'Diverifikasi' ? 'border-success' : ($progress->status_verifikasi === 'Ditolak' ? 'border-danger' : 'border-warning') }} ps-3 mb-3">
+                <div class="border-start border-3 {{ $progress->status_verifikasi === 'Diterima' ? 'border-success' : ($progress->status_verifikasi === 'Ditolak' ? 'border-danger' : 'border-warning') }} ps-3 mb-3">
                     <div class="d-flex justify-content-between">
                         <span class="fw-semibold small">{{ $progress->keterangan_progress }}</span>
-                        <span class="badge bg-{{ $progress->status_verifikasi === 'Diverifikasi' ? 'success' : ($progress->status_verifikasi === 'Ditolak' ? 'danger' : 'warning') }}">{{ $progress->status_verifikasi }}</span>
+                        <span class="badge bg-{{ $progress->status_verifikasi === 'Diterima' ? 'success' : ($progress->status_verifikasi === 'Ditolak' ? 'danger' : 'warning') }}">{{ $progress->status_verifikasi }}</span>
                     </div>
                     <div class="text-muted small">
                         Dilaporkan: {{ $progress->dilaporkanOleh->nama ?? '-' }} &middot; {{ $progress->created_at->format('d/m/Y H:i') }}
@@ -53,11 +53,11 @@
                     @if($progress->file_bukti)
                     <a href="{{ asset('storage/' . $progress->file_bukti) }}" class="small" target="_blank"><i class="fas fa-paperclip me-1"></i>Lihat Bukti</a>
                     @endif
-                    @if($progress->status_verifikasi === 'Menunggu')
+                    @if($progress->status_verifikasi === 'Pending')
                     <div class="mt-2">
                         <form action="{{ route('tindak-lanjut.progress.verify', $progress) }}" method="POST" class="d-inline">
                             @csrf
-                            <input type="hidden" name="status_verifikasi" value="Diverifikasi">
+                            <input type="hidden" name="status_verifikasi" value="Diterima">
                             <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check me-1"></i>Verifikasi</button>
                         </form>
                         <form action="{{ route('tindak-lanjut.progress.verify', $progress) }}" method="POST" class="d-inline">

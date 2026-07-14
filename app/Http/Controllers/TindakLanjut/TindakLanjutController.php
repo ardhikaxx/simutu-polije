@@ -46,7 +46,7 @@ class TindakLanjutController extends Controller
             'tindak_lanjut_temuan_id' => $tl->id,
             'keterangan_progress' => $validated['keterangan_progress'],
             'dilaporkan_oleh' => auth()->id(),
-            'status_verifikasi' => 'Menunggu',
+            'status_verifikasi' => 'Pending',
         ];
 
         if ($request->hasFile('file_bukti')) {
@@ -55,8 +55,8 @@ class TindakLanjutController extends Controller
 
         TindakLanjutProgress::create($data);
 
-        if ($tl->status === 'Belum Ditindaklanjuti') {
-            $tl->update(['status' => 'Dalam Proses']);
+        if ($tl->status === 'Open') {
+            $tl->update(['status' => 'On Progress']);
         }
 
         return redirect()->route('tindak-lanjut.show', $tl)
@@ -66,7 +66,7 @@ class TindakLanjutController extends Controller
     public function verify(Request $request, TindakLanjutProgress $progress)
     {
         $validated = $request->validate([
-            'status_verifikasi' => 'required|in:Diverifikasi,Ditolak',
+            'status_verifikasi' => 'required|in:Diterima,Ditolak',
         ]);
 
         $validated['diverifikasi_oleh'] = auth()->id();
@@ -80,11 +80,11 @@ class TindakLanjutController extends Controller
             ->count() > 0;
 
         $hasVerified = $tl->tindakLanjutProgress()
-            ->where('status_verifikasi', 'Diverifikasi')
+            ->where('status_verifikasi', 'Diterima')
             ->count() > 0;
 
         if ($hasVerified) {
-            $tl->update(['status' => 'Selesai']);
+            $tl->update(['status' => 'Closed']);
         }
 
         return redirect()->route('tindak-lanjut.show', $tl)

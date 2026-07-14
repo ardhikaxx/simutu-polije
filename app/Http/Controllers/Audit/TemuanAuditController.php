@@ -13,8 +13,8 @@ class TemuanAuditController extends Controller
     {
         $validated = $request->validate([
             'hasil_audit_id' => 'required|exists:hasil_audit,id',
-            'kategori_temuan' => 'required|in:Kesesuaian,Ketidaksesuaian,Observasi,Potensi',
-            'tingkat_risiko' => 'required|in:Rendah,Sedang,Tinggi,Kritis',
+            'kategori_temuan' => 'required|in:Observasi,Minor,Major',
+            'tingkat_risiko' => 'required|in:Rendah,Sedang,Tinggi',
             'deskripsi_temuan' => 'required|string',
             'rekomendasi' => 'nullable|string',
             'standar_mutu_id' => 'nullable|exists:standar_mutu,id',
@@ -29,8 +29,8 @@ class TemuanAuditController extends Controller
     public function update(Request $request, TemuanAudit $temuan)
     {
         $validated = $request->validate([
-            'kategori_temuan' => 'required|in:Kesesuaian,Ketidaksesuaian,Observasi,Potensi',
-            'tingkat_risiko' => 'required|in:Rendah,Sedang,Tinggi,Kritis',
+            'kategori_temuan' => 'required|in:Observasi,Minor,Major',
+            'tingkat_risiko' => 'required|in:Rendah,Sedang,Tinggi',
             'deskripsi_temuan' => 'required|string',
             'rekomendasi' => 'nullable|string',
             'standar_mutu_id' => 'nullable|exists:standar_mutu,id',

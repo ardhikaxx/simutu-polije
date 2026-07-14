@@ -74,10 +74,10 @@
                     <tr>
                         <td class="text-muted">Status</td>
                         <td>
-                            @if($user->status == 'active')
+                            @if($user->status == 'aktif')
                                 <span class="badge bg-success">Aktif</span>
                             @else
-                                <span class="badge bg-secondary">{{ ucfirst($user->status ?? 'Tidak Aktif') }}</span>
+                                <span class="badge bg-secondary">{{ ucfirst($user->status ?? 'Nonaktif') }}</span>
                             @endif
                         </td>
                     </tr>

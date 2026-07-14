@@ -15,7 +15,7 @@
         </nav>
     </div>
     <div class="d-flex gap-2">
-        @php $sb = match($hasil->status) { 'Draft'=>'secondary', 'Disetujui'=>'success', default=>'warning' }; @endphp
+        @php $sb = match($hasil->status) { 'Draft'=>'secondary', 'Approved'=>'success', 'Submitted'=>'info', default=>'warning' }; @endphp
         <span class="badge bg-{{ $sb }} fs-6">{{ $hasil->status }}</span>
         <a href="{{ route('audit.hasil.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i>Kembali</a>
     </div>
@@ -80,7 +80,7 @@
                             <tr>
                                 <td>{{ $idx + 1 }}</td>
                                 <td><span class="badge bg-info">{{ $temuan->kategori_temuan }}</span></td>
-                                <td><span class="badge bg-{{ match($temuan->tingkat_risiko) { 'Kritis'=>'danger', 'Tinggi'=>'warning', 'Sedang'=>'info', default=>'secondary' } }}">{{ $temuan->tingkat_risiko }}</span></td>
+                                <td><span class="badge bg-{{ match($temuan->tingkat_risiko) { 'Tinggi'=>'danger', 'Sedang'=>'warning', default=>'info' } }}">{{ $temuan->tingkat_risiko }}</span></td>
                                 <td>{{ $temuan->deskripsi_temuan }}</td>
                             </tr>
                             @endforeach
@@ -143,10 +143,9 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Kategori Temuan <span class="text-danger">*</span></label>
                             <select name="kategori_temuan" class="form-select" required>
-                                <option value="Kesesuaian">Kesesuaian</option>
-                                <option value="Ketidaksesuaian">Ketidaksesuaian</option>
                                 <option value="Observasi">Observasi</option>
-                                <option value="Potensi">Potensi</option>
+                                <option value="Minor">Minor</option>
+                                <option value="Mayor">Mayor</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -155,7 +154,6 @@
                                 <option value="Rendah">Rendah</option>
                                 <option value="Sedang">Sedang</option>
                                 <option value="Tinggi">Tinggi</option>
-                                <option value="Kritis">Kritis</option>
                             </select>
                         </div>
                         <div class="col-12 mb-3">

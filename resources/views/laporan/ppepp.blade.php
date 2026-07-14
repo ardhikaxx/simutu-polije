@@ -51,8 +51,8 @@
     <div class="col-md-3">
         <div class="card border-0 shadow-sm bg-warning text-white text-center">
             <div class="card-body">
-                <h3 class="mb-0">{{ $siklus->ppeppPelaksanaan->where('status', 'Berjalan')->count() }}</h3>
-                <small>Berjalan</small>
+                <h3 class="mb-0">{{ $siklus->ppeppPelaksanaan->where('status', 'Proses')->count() }}</h3>
+                <small>Proses</small>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
                     <tr>
                         <td>{{ $idx + 1 }}</td>
                         <td>{{ $pk->programStudi->nama_prodi ?? $pk->unitKerja->nama_unit ?? '-' }}</td>
-                        <td><span class="badge bg-{{ match($pk->status) { 'Selesai'=>'success', 'Berjalan'=>'warning', default=>'secondary' } }}">{{ $pk->status }}</span></td>
+                        <td><span class="badge bg-{{ match($pk->status) { 'Selesai'=>'success', 'Proses'=>'warning', default=>'secondary' } }}">{{ $pk->status }}</span></td>
                         <td>{{ $pk->tanggal_pelaksanaan ? $pk->tanggal_pelaksanaan->format('d/m/Y') : '-' }}</td>
                     </tr>
                     @endforeach

@@ -23,7 +23,7 @@ class DashboardRedirectController extends Controller
                 'standarMutuAktif' => StandarMutu::where('status', 'Published')->count(),
                 'dokumenMutu' => DokumenMutu::count(),
                 'auditBerjalan' => JadwalAudit::whereIn('status', ['Terjadwal', 'Berlangsung'])->count(),
-                'tindakLanjutOpen' => TindakLanjutTemuan::whereIn('status', ['Belum Ditindaklanjuti', 'Dalam Proses'])->count(),
+                'tindakLanjutOpen' => TindakLanjutTemuan::whereIn('status', ['Open', 'On Progress'])->count(),
                 'surveiAktif' => Survei::where('status', 'Aktif')->count(),
                 'totalProdi' => ProgramStudi::count(),
             ];

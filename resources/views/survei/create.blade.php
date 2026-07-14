@@ -76,9 +76,9 @@
                     <div class="col-md-4">
                         <label class="form-label small">Tipe Jawaban <span class="text-danger">*</span></label>
                         <select name="pertanyaan[0][tipe_jawaban]" class="form-select" required>
-                            <option value="Rating">Rating (1-5)</option>
-                            <option value="Teks">Teks</option>
-                            <option value="Pilihan Ganda">Pilihan Ganda</option>
+                            <option value="skala_likert">Skala Likert (1-5)</option>
+                            <option value="pilihan_ganda">Pilihan Ganda</option>
+                            <option value="esai">Esai</option>
                         </select>
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
@@ -108,9 +108,9 @@ $('#addQuestion').on('click', function() {
         <div class="col-md-4">
             <label class="form-label small">Tipe Jawaban <span class="text-danger">*</span></label>
             <select name="pertanyaan[${qIndex}][tipe_jawaban]" class="form-select" required>
-                <option value="Rating">Rating (1-5)</option>
-                <option value="Teks">Teks</option>
-                <option value="Pilihan Ganda">Pilihan Ganda</option>
+                <option value="skala_likert">Skala Likert (1-5)</option>
+                <option value="pilihan_ganda">Pilihan Ganda</option>
+                <option value="esai">Esai</option>
             </select>
         </div>
         <div class="col-md-1 d-flex align-items-end">

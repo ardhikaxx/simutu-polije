@@ -40,7 +40,7 @@
                         <td>{{ $pk->deskripsi_implementasi ?? '-' }}</td>
                         <td>{{ $pk->tanggal_pelaksanaan ? $pk->tanggal_pelaksanaan->format('d/m/Y') : '-' }}</td>
                         <td>
-                            @php $sb = match($pk->status) { 'Selesai'=>'success', 'Berjalan'=>'warning', default=>'secondary' }; @endphp
+                            @php $sb = match($pk->status) { 'Selesai'=>'success', 'Proses'=>'warning', default=>'secondary' }; @endphp
                             <span class="badge bg-{{ $sb }}">{{ $pk->status }}</span>
                         </td>
                         <td>
@@ -52,7 +52,7 @@
                                     @csrf @method('PUT')
                                     <select name="status" class="form-select form-select-sm d-inline-block w-auto" onchange="this.form.submit()">
                                         <option value="Belum" {{ $pk->status === 'Belum' ? 'selected' : '' }}>Belum</option>
-                                        <option value="Berjalan" {{ $pk->status === 'Berjalan' ? 'selected' : '' }}>Berjalan</option>
+                                        <option value="Proses" {{ $pk->status === 'Proses' ? 'selected' : '' }}>Proses</option>
                                         <option value="Selesai" {{ $pk->status === 'Selesai' ? 'selected' : '' }}>Selesai</option>
                                     </select>
                                 </form>

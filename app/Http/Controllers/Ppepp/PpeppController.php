@@ -50,7 +50,7 @@ class PpeppController extends Controller
     public function updatePelaksanaan(Request $request, PpeppPelaksanaan $pelaksanaan)
     {
         $validated = $request->validate([
-            'status' => 'required|in:Belum,Berjalan,Selesai',
+            'status' => 'required|in:Belum,Proses,Selesai',
             'deskripsi_implementasi' => 'nullable|string',
         ]);
 

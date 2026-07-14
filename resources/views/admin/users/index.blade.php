@@ -60,8 +60,8 @@
                             </span>
                         </td>
                         <td>
-                            <span class="badge bg-{{ $user->status === 'active' ? 'success' : 'danger' }}">
-                                {{ $user->status ?? '-' }}
+                            <span class="badge bg-{{ $user->status === 'aktif' ? 'success' : 'danger' }}">
+                                {{ ucfirst($user->status ?? '-') }}
                             </span>
                         </td>
                         <td>

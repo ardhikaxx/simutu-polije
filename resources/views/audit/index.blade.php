@@ -36,7 +36,7 @@
                 <label class="form-label small fw-semibold">Status</label>
                 <select name="status" class="form-select">
                     <option value="">Semua Status</option>
-                    @foreach(['Terjadwal', 'Berlangsung', 'Selesai', 'Dibatalkan'] as $s)
+                    @foreach(['Draft', 'Terjadwal', 'Berlangsung', 'Selesai'] as $s)
                     <option value="{{ $s }}" {{ request('status') == $s ? 'selected' : '' }}>{{ $s }}</option>
                     @endforeach
                 </select>
@@ -72,7 +72,7 @@
                         <td>{{ $jadwal->tanggal_audit->format('d/m/Y') }}</td>
                         <td><span class="badge bg-info">{{ $jadwal->jenis_audit }}</span></td>
                         <td>
-                            @php $sb = match($jadwal->status) { 'Terjadwal'=>'primary', 'Berlangsung'=>'warning', 'Selesai'=>'success', 'Dibatalkan'=>'danger', default=>'secondary' }; @endphp
+                            @php $sb = match($jadwal->status) { 'Terjadwal'=>'primary', 'Berlangsung'=>'warning', 'Selesai'=>'success', 'Draft'=>'info', default=>'secondary' }; @endphp
                             <span class="badge bg-{{ $sb }}">{{ $jadwal->status }}</span>
                         </td>
                         <td>

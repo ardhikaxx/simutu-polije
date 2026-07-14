@@ -48,7 +48,7 @@ class SurveiController extends Controller
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'pertanyaan' => 'required|array|min:1',
             'pertanyaan.*.teks_pertanyaan' => 'required|string|max:500',
-            'pertanyaan.*.tipe_jawaban' => 'required|in:Rating,Teks,Pilihan Ganda,Multiple Choice',
+            'pertanyaan.*.tipe_jawaban' => 'required|in:skala_likert,pilihan_ganda,esai',
         ]);
 
         $survei = Survei::create([

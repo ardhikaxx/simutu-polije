@@ -86,7 +86,7 @@ class HasilAuditController extends Controller
 
     public function approve(HasilAudit $hasil)
     {
-        $hasil->update(['status' => 'Disetujui']);
+        $hasil->update(['status' => 'Approved']);
 
         return redirect()->route('audit.hasil.show', $hasil)
             ->with('success', 'Hasil audit berhasil disetujui.');

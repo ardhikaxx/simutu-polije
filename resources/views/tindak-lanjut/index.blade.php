@@ -22,7 +22,7 @@
                 <label class="form-label small fw-semibold">Status</label>
                 <select name="status" class="form-select">
                     <option value="">Semua Status</option>
-                    @foreach(['Belum Ditindaklanjuti', 'Dalam Proses', 'Selesai'] as $s)
+                    @foreach(['Open', 'On Progress', 'Need Revision', 'Verified', 'Closed'] as $s)
                     <option value="{{ $s }}" {{ request('status') == $s ? 'selected' : '' }}>{{ $s }}</option>
                     @endforeach
                 </select>
@@ -57,13 +57,13 @@
                         <td class="fw-semibold small">{{ Str::limit($tl->temuanAudit->deskripsi_temuan ?? '-', 50) }}</td>
                         <td><span class="badge bg-info">{{ $tl->temuanAudit->kategori_temuan ?? '-' }}</span></td>
                         <td>
-                            @php $rb = match($tl->temuanAudit->tingkat_risiko ?? '') { 'Kritis'=>'danger', 'Tinggi'=>'warning', 'Sedang'=>'info', 'Rendah'=>'secondary', default=>'secondary' }; @endphp
+                            @php $rb = match($tl->temuanAudit->tingkat_risiko ?? '') { 'Tinggi'=>'danger', 'Sedang'=>'warning', 'Rendah'=>'info', default=>'secondary' }; @endphp
                             <span class="badge bg-{{ $rb }}">{{ $tl->temuanAudit->tingkat_risiko ?? '-' }}</span>
                         </td>
                         <td>{{ $tl->penanggungJawab->nama ?? '-' }}</td>
                         <td>{{ $tl->target_selesai ? $tl->target_selesai->format('d/m/Y') : '-' }}</td>
                         <td>
-                            @php $sb = match($tl->status) { 'Selesai'=>'success', 'Dalam Proses'=>'warning', default=>'secondary' }; @endphp
+                            @php $sb = match($tl->status) { 'Closed'=>'success', 'Verified'=>'success', 'On Progress'=>'warning', 'Need Revision'=>'danger', default=>'secondary' }; @endphp
                             <span class="badge bg-{{ $sb }}">{{ $tl->status }}</span>
                         </td>
                         <td>

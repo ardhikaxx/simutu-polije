@@ -44,7 +44,7 @@
                             @endif
                         </td>
                         <td>
-                            @php $sb = match($hasil->status) { 'Draft'=>'secondary', 'Disetujui'=>'success', default=>'warning' }; @endphp
+                            @php $sb = match($hasil->status) { 'Draft'=>'secondary', 'Approved'=>'success', 'Submitted'=>'info', default=>'warning' }; @endphp
                             <span class="badge bg-{{ $sb }}">{{ $hasil->status }}</span>
                         </td>
                         <td>

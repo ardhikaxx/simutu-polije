@@ -41,7 +41,7 @@ class AdminUserController extends Controller
             'jurusan_id' => 'nullable|exists:fakultas_jurusan,id',
             'program_studi_id' => 'nullable|exists:program_studi,id',
             'unit_kerja_id' => 'nullable|exists:unit_kerja,id',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:aktif,nonaktif',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -75,7 +75,7 @@ class AdminUserController extends Controller
             'jurusan_id' => 'nullable|exists:fakultas_jurusan,id',
             'program_studi_id' => 'nullable|exists:program_studi,id',
             'unit_kerja_id' => 'nullable|exists:unit_kerja,id',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:aktif,nonaktif',
         ]);
 
         if (!empty($validated['password'])) {

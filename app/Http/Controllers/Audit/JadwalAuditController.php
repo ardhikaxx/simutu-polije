@@ -46,15 +46,15 @@ class JadwalAuditController extends Controller
             'periode_audit_id' => 'required|exists:periode_audit,id',
             'program_studi_id' => 'required|exists:program_studi,id',
             'tanggal_audit' => 'required|date',
-            'jenis_audit' => 'required|in:Internal,Eksternal,Self Assessment',
+            'jenis_audit' => 'required|in:Reguler,Khusus',
         ]);
 
         $validated['dibuat_oleh'] = Auth::id();
-        $validated['status'] = 'Terjadwal';
+        $validated['status'] = 'Draft';
 
         JadwalAudit::create($validated);
 
-        return redirect()->route('audit.index')
+        return redirect()->route('jadwal-audit.index')
             ->with('success', 'Jadwal Audit berhasil dibuat.');
     }
 
@@ -72,13 +72,13 @@ class JadwalAuditController extends Controller
             'periode_audit_id' => 'required|exists:periode_audit,id',
             'program_studi_id' => 'required|exists:program_studi,id',
             'tanggal_audit' => 'required|date',
-            'jenis_audit' => 'required|in:Internal,Eksternal,Self Assessment',
-            'status' => 'required|in:Terjadwal,Berlangsung,Selesai,Dibatalkan',
+            'jenis_audit' => 'required|in:Reguler,Khusus',
+            'status' => 'required|in:Draft,Terjadwal,Berlangsung,Selesai',
         ]);
 
         $jadwal->update($validated);
 
-        return redirect()->route('audit.show', $jadwal)
+        return redirect()->route('jadwal-audit.show', $jadwal)
             ->with('success', 'Jadwal Audit berhasil diperbarui.');
     }
 
@@ -86,7 +86,7 @@ class JadwalAuditController extends Controller
     {
         $jadwal->delete();
 
-        return redirect()->route('audit.index')
+        return redirect()->route('jadwal-audit.index')
             ->with('success', 'Jadwal Audit berhasil dihapus.');
     }
 
@@ -108,7 +108,7 @@ class JadwalAuditController extends Controller
             ]);
         }
 
-        return redirect()->route('audit.show', $jadwal)
+        return redirect()->route('jadwal-audit.show', $jadwal)
             ->with('success', 'Tim Audit berhasil ditetapkan.');
     }
 }
