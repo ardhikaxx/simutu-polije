@@ -139,6 +139,21 @@
             color: #6b7280;
             cursor: pointer;
         }
+
+        @media (max-width: 575.98px) {
+            .login-body {
+                padding: 1.25rem 1rem;
+            }
+            .login-header {
+                padding: 1.75rem 1rem 1.5rem;
+            }
+            .login-body .form-control {
+                font-size: 16px !important;
+            }
+            .login-footer {
+                padding: 0.75rem 1rem 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>

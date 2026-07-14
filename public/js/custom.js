@@ -10,32 +10,64 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebarClose = document.getElementById('sidebarClose');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
+    const mainWrapper = document.getElementById('main-wrapper');
 
-    if (sidebarToggle) {
+    if (sidebarToggle && sidebar && overlay && mainWrapper) {
         sidebarToggle.addEventListener('click', function () {
             if (window.innerWidth < 992) {
                 sidebar.classList.toggle('show');
                 overlay.classList.toggle('show');
             } else {
                 sidebar.classList.toggle('collapsed');
-                document.getElementById('main-wrapper').classList.toggle('sidebar-collapsed');
+                mainWrapper.classList.toggle('sidebar-collapsed');
             }
         });
     }
 
-    if (sidebarClose) {
+    if (sidebarClose && sidebar && overlay) {
         sidebarClose.addEventListener('click', function () {
             sidebar.classList.remove('show');
             overlay.classList.remove('show');
         });
     }
 
-    if (overlay) {
+    if (overlay && sidebar) {
         overlay.addEventListener('click', function () {
             sidebar.classList.remove('show');
             overlay.classList.remove('show');
         });
     }
+
+    // Auto close sidebar on mobile when a navigation link is clicked
+    if (sidebar) {
+        sidebar.querySelectorAll('.sidebar-nav .nav-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                if (window.innerWidth < 992) {
+                    sidebar.classList.remove('show');
+                    if (overlay) overlay.classList.remove('show');
+                }
+            });
+        });
+    }
+
+    // Close sidebar on mobile when Escape key is pressed
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && window.innerWidth < 992 && sidebar && sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+            if (overlay) overlay.classList.remove('show');
+        }
+    });
+
+    // Clean up classes when resizing across breakpoints
+    window.addEventListener('resize', debounce(function () {
+        if (window.innerWidth >= 992 && sidebar && sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+            if (overlay) overlay.classList.remove('show');
+        } else if (window.innerWidth < 992 && sidebar && sidebar.classList.contains('collapsed')) {
+            sidebar.classList.remove('collapsed');
+            if (mainWrapper) mainWrapper.classList.remove('sidebar-collapsed');
+        }
+    }, 150));
 });
 
 /* ============================================
@@ -218,8 +250,22 @@ function updateNotificationBadge(count) {
     }
 }
 
+function initResponsiveTables() {
+    document.querySelectorAll('.content-wrapper table.table, .modal-body table.table').forEach(function (table) {
+        if (!table.parentElement.classList.contains('table-responsive') &&
+            !table.parentElement.classList.contains('dataTables_scrollBody') &&
+            !table.parentElement.classList.contains('dataTables_wrapper')) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive w-100 overflow-x-auto';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     startNotificationPolling(30000);
+    initResponsiveTables();
 });
 
 /* ============================================
@@ -229,6 +275,7 @@ function initSimutuDataTable(selector, options) {
     selector = selector || '.simutu-datatable';
     var defaults = {
         responsive: true,
+        scrollX: true,
         pageLength: 10,
         lengthMenu: [10, 25, 50, 100],
         language: {
@@ -248,7 +295,9 @@ function initSimutuDataTable(selector, options) {
     };
 
     var merged = $.extend({}, defaults, options || {});
-    return $(selector).DataTable(merged);
+    var dt = $(selector).DataTable(merged);
+    initResponsiveTables();
+    return dt;
 }
 
 /* ============================================

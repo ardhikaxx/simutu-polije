@@ -32,7 +32,7 @@
 </div>
 
 <div class="row mb-4">
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-primary text-white text-center">
             <div class="card-body">
                 <h3 class="mb-0">{{ $siklus->ppeppPelaksanaan->count() }}</h3>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-success text-white text-center">
             <div class="card-body">
                 <h3 class="mb-0">{{ $siklus->ppeppPelaksanaan->where('status', 'Selesai')->count() }}</h3>
@@ -48,7 +48,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-warning text-white text-center">
             <div class="card-body">
                 <h3 class="mb-0">{{ $siklus->ppeppPelaksanaan->where('status', 'Proses')->count() }}</h3>
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-secondary text-white text-center">
             <div class="card-body">
                 <h3 class="mb-0">{{ $siklus->ppeppPelaksanaan->where('status', 'Belum')->count() }}</h3>

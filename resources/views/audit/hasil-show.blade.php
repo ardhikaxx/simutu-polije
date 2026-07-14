@@ -14,7 +14,7 @@
             </ol>
         </nav>
     </div>
-    <div class="d-flex gap-2">
+    <div class="d-flex flex-wrap gap-2">
         @php $sb = match($hasil->status) { 'Draft'=>'secondary', 'Approved'=>'success', 'Submitted'=>'info', default=>'warning' }; @endphp
         <span class="badge bg-{{ $sb }} fs-6">{{ $hasil->status }}</span>
         <a href="{{ route('audit.hasil.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i>Kembali</a>
@@ -26,13 +26,26 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white"><h6 class="mb-0 fw-bold">Informasi Audit</h6></div>
             <div class="card-body">
-                <table class="table table-borderless mb-0">
-                    <tr><td class="text-muted" style="width:180px">Program Studi</td><td class="fw-semibold">{{ $hasil->jadwalAudit->programStudi->nama_prodi ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Periode Audit</td><td>{{ $hasil->jadwalAudit->periodeAudit->nama ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Template</td><td>{{ $hasil->checklistAuditTemplate->nama_template ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Total Skor</td><td class="fw-bold fs-5 {{ ($hasil->total_skor ?? 0) >= 80 ? 'text-success' : (($hasil->total_skor ?? 0) >= 60 ? 'text-warning' : 'text-danger') }}">{{ number_format($hasil->total_skor ?? 0, 1) }}</td></tr>
-                    <tr><td class="text-muted">Kesimpulan</td><td>{{ $hasil->kesimpulan ?? '-' }}</td></tr>
-                </table>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Program Studi</div>
+                    <div class="fw-semibold">{{ $hasil->jadwalAudit->programStudi->nama_prodi ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Periode Audit</div>
+                    <div>{{ $hasil->jadwalAudit->periodeAudit->nama ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Template</div>
+                    <div>{{ $hasil->checklistAuditTemplate->nama_template ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Total Skor</div>
+                    <div class="fw-bold fs-5 {{ ($hasil->total_skor ?? 0) >= 80 ? 'text-success' : (($hasil->total_skor ?? 0) >= 60 ? 'text-warning' : 'text-danger') }}">{{ number_format($hasil->total_skor ?? 0, 1) }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Kesimpulan</div>
+                    <div>{{ $hasil->kesimpulan ?? '-' }}</div>
+                </div>
             </div>
         </div>
 

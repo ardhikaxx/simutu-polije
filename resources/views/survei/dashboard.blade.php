@@ -16,7 +16,7 @@
 </div>
 
 <div class="row mb-4">
-    <div class="col-6 col-md-4">
+    <div class="col-12 col-sm-6 col-md-4">
         <div class="card border-0 shadow-sm bg-primary text-white text-center">
             <div class="card-body">
                 <h3 class="mb-0">{{ $stats['total_survei'] }}</h3>
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-12 col-sm-6 col-md-4">
         <div class="card border-0 shadow-sm bg-success text-white text-center">
             <div class="card-body">
                 <h3 class="mb-0">{{ $stats['survei_aktif'] }}</h3>
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-12 col-sm-6 col-md-4">
         <div class="card border-0 shadow-sm bg-info text-white text-center">
             <div class="card-body">
                 <h3 class="mb-0">{{ $stats['total_responden'] }}</h3>

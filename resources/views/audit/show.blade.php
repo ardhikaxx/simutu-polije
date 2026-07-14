@@ -14,7 +14,7 @@
             </ol>
         </nav>
     </div>
-    <div class="d-flex gap-2">
+    <div class="d-flex flex-wrap gap-2">
         @php $sb = match($jadwal->status) { 'Terjadwal'=>'primary', 'Berlangsung'=>'warning', 'Selesai'=>'success', 'Draft'=>'info', default=>'secondary' }; @endphp
         <span class="badge bg-{{ $sb }} fs-6">{{ $jadwal->status }}</span>
         <a href="{{ route('jadwal-audit.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i>Kembali</a>
@@ -26,13 +26,26 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white"><h6 class="mb-0 fw-bold">Informasi Jadwal</h6></div>
             <div class="card-body">
-                <table class="table table-borderless mb-0">
-                    <tr><td class="text-muted" style="width:180px">Program Studi</td><td class="fw-semibold">{{ $jadwal->programStudi->nama_prodi ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Periode Audit</td><td>{{ $jadwal->periodeAudit->nama ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Tanggal Audit</td><td>{{ $jadwal->tanggal_audit ? $jadwal->tanggal_audit->format('d/m/Y') : '-' }}</td></tr>
-                    <tr><td class="text-muted">Jenis Audit</td><td><span class="badge bg-info">{{ $jadwal->jenis_audit }}</span></td></tr>
-                    <tr><td class="text-muted">Dibuat Oleh</td><td>{{ $jadwal->dibuatOleh->nama ?? '-' }}</td></tr>
-                </table>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Program Studi</div>
+                    <div class="fw-semibold">{{ $jadwal->programStudi->nama_prodi ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Periode Audit</div>
+                    <div>{{ $jadwal->periodeAudit->nama ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Tanggal Audit</div>
+                    <div>{{ $jadwal->tanggal_audit ? $jadwal->tanggal_audit->format('d/m/Y') : '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Jenis Audit</div>
+                    <div><span class="badge bg-info">{{ $jadwal->jenis_audit }}</span></div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Dibuat Oleh</div>
+                    <div>{{ $jadwal->dibuatOleh->nama ?? '-' }}</div>
+                </div>
             </div>
         </div>
 

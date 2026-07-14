@@ -21,12 +21,22 @@
     <div class="col-md-6">
         <div class="card border-0 shadow-sm">
             <div class="card-body">
-                <table class="table table-borderless mb-0">
-                    <tr><td class="text-muted" style="width:160px">Standar Mutu</td><td class="fw-semibold">{{ $siklus->standarMutu->nama_standar ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Tahun Akademik</td><td>{{ $siklus->tahunAkademik->nama ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Tahap Sekarang</td><td><span class="badge bg-primary">{{ ucfirst($siklus->tahap_sekarang) }}</span></td></tr>
-                    <tr><td class="text-muted">Status</td><td><span class="badge bg-{{ $siklus->status_siklus === 'Selesai' ? 'success' : 'warning' }}">{{ $siklus->status_siklus }}</span></td></tr>
-                </table>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:140px;">Standar Mutu</div>
+                    <div class="fw-semibold">{{ $siklus->standarMutu->nama_standar ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:140px;">Tahun Akademik</div>
+                    <div>{{ $siklus->tahunAkademik->nama ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:140px;">Tahap Sekarang</div>
+                    <div><span class="badge bg-primary">{{ ucfirst($siklus->tahap_sekarang) }}</span></div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2">
+                    <div class="text-muted fw-semibold" style="min-width:140px;">Status</div>
+                    <div><span class="badge bg-{{ $siklus->status_siklus === 'Selesai' ? 'success' : 'warning' }}">{{ $siklus->status_siklus }}</span></div>
+                </div>
             </div>
         </div>
     </div>

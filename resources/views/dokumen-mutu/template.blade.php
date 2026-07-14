@@ -26,7 +26,7 @@
                     <label class="form-label small fw-semibold">Cari Template</label>
                     <input type="text" name="search" class="form-control form-control-sm" placeholder="Nama template atau deskripsi..." value="{{ request('search') }}">
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-md-4">
                     <label class="form-label small fw-semibold">Standar Mutu</label>
                     <select name="standar" class="form-select form-select-sm">
                         <option value="">Semua Standar</option>
@@ -35,7 +35,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-12 col-md-2">
                     <button type="submit" class="btn btn-sm btn-primary w-100"><i class="fas fa-search me-1"></i>Filter</button>
                 </div>
             </div>

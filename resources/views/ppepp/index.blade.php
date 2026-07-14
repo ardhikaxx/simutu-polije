@@ -27,7 +27,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-6 col-md-4">
+            <div class="col-12 col-sm-6 col-md-4">
                 <label class="form-label small fw-semibold">Status Siklus</label>
                 <select name="status_siklus" class="form-select form-select-sm">
                     <option value="">Semua Status</option>
@@ -36,7 +36,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-6 col-md-4">
+            <div class="col-12 col-sm-6 col-md-4">
                 <button type="submit" class="btn btn-sm btn-primary w-100"><i class="fas fa-filter me-1"></i>Filter</button>
             </div>
         </form>
@@ -44,7 +44,7 @@
 </div>
 
 <div class="row mb-4">
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-primary text-white">
             <div class="card-body text-center">
                 <i class="fas fa-sync-alt fa-2x mb-2"></i>
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-success text-white">
             <div class="card-body text-center">
                 <i class="fas fa-check-circle fa-2x mb-2"></i>
@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-warning text-white">
             <div class="card-body text-center">
                 <i class="fas fa-spinner fa-2x mb-2"></i>
@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-info text-white">
             <div class="card-body text-center">
                 <i class="fas fa-chart-line fa-2x mb-2"></i>

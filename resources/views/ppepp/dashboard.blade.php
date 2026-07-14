@@ -22,7 +22,7 @@
 @endif
 
 <div class="row mb-4">
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-primary text-white">
             <div class="card-body text-center">
                 <h3 class="mb-0">{{ $sikluses->count() }}</h3>
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-success text-white">
             <div class="card-body text-center">
                 <h3 class="mb-0">{{ $sikluses->where('status_siklus', 'Selesai')->count() }}</h3>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-warning text-white">
             <div class="card-body text-center">
                 <h3 class="mb-0">{{ $sikluses->where('status_siklus', 'Berjalan')->count() }}</h3>
@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="card border-0 shadow-sm bg-danger text-white">
             <div class="card-body text-center">
                 @php

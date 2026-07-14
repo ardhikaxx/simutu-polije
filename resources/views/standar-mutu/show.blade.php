@@ -14,7 +14,7 @@
             </ol>
         </nav>
     </div>
-    <div class="d-flex gap-2">
+    <div class="d-flex flex-wrap gap-2">
         @php
         $badgeClass = match($standar->status) {
             'Draft' => 'secondary',
@@ -42,32 +42,30 @@
                 <h6 class="mb-0 fw-bold">Informasi Standar Mutu</h6>
             </div>
             <div class="card-body">
-                <table class="table table-borderless mb-0">
-                    <tr>
-                        <td class="text-muted" style="width:200px">Kode Standar</td>
-                        <td class="fw-semibold"><code>{{ $standar->kode_standar }}</code></td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Kategori</td>
-                        <td>{{ $standar->kategoriStandar->nama ?? '-' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Deskripsi</td>
-                        <td>{{ $standar->deskripsi ?? '-' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Dasar Hukum</td>
-                        <td>{{ $standar->dasar_hukum ?? '-' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Versi Aktif</td>
-                        <td><span class="badge bg-light text-dark">v{{ $standar->versiAktif->nomor_versi ?? '1.0' }}</span></td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted">Dibuat Oleh</td>
-                        <td>{{ $standar->dibuatOleh->nama ?? '-' }}</td>
-                    </tr>
-                </table>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Kode Standar</div>
+                    <div class="fw-semibold"><code>{{ $standar->kode_standar }}</code></div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Kategori</div>
+                    <div>{{ $standar->kategoriStandar->nama ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Deskripsi</div>
+                    <div>{{ $standar->deskripsi ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Dasar Hukum</div>
+                    <div>{{ $standar->dasar_hukum ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Versi Aktif</div>
+                    <div><span class="badge bg-light text-dark">v{{ $standar->versiAktif->nomor_versi ?? '1.0' }}</span></div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Dibuat Oleh</div>
+                    <div>{{ $standar->dibuatOleh->nama ?? '-' }}</div>
+                </div>
             </div>
         </div>
 

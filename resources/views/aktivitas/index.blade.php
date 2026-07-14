@@ -19,11 +19,11 @@
     <div class="card-body">
         <form method="GET">
             <div class="row g-3 align-items-end">
-                <div class="col-md-5">
+                <div class="col-12 col-md-5">
                     <label class="form-label small fw-semibold">Cari Aktivitas</label>
                     <input type="text" name="search" class="form-control form-control-sm" placeholder="Deskripsi atau modul..." value="{{ request('search') }}">
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-md-4">
                     <label class="form-label small fw-semibold">User</label>
                     <select name="user" class="form-select form-select-sm">
                         <option value="">Semua User</option>
@@ -32,7 +32,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-md-3">
                     <button type="submit" class="btn btn-sm btn-primary w-100"><i class="fas fa-search me-1"></i>Filter</button>
                 </div>
             </div>

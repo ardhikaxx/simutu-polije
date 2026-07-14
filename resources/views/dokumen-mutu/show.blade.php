@@ -27,15 +27,34 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white"><h6 class="mb-0 fw-bold">Informasi Dokumen</h6></div>
             <div class="card-body">
-                <table class="table table-borderless mb-0">
-                    <tr><td class="text-muted" style="width:200px">Nomor Dokumen</td><td class="fw-semibold"><code>{{ $dokumen->nomor_dokumen }}</code></td></tr>
-                    <tr><td class="text-muted">Kategori</td><td>{{ $dokumen->kategoriDokumen->nama ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Program Studi</td><td>{{ $dokumen->programStudi->nama_prodi ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Unit Kerja</td><td>{{ $dokumen->unitKerja->nama_unit ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Standar Mutu</td><td>{{ $dokumen->standarMutu->nama_standar ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Versi Aktif</td><td>v{{ $dokumen->versiAktif->nomor_versi ?? '1.0' }}</td></tr>
-                    <tr><td class="text-muted">Dibuat Oleh</td><td>{{ $dokumen->dibuatOleh->nama ?? '-' }}</td></tr>
-                </table>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Nomor Dokumen</div>
+                    <div class="fw-semibold"><code>{{ $dokumen->nomor_dokumen }}</code></div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Kategori</div>
+                    <div>{{ $dokumen->kategoriDokumen->nama ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Program Studi</div>
+                    <div>{{ $dokumen->programStudi->nama_prodi ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Unit Kerja</div>
+                    <div>{{ $dokumen->unitKerja->nama_unit ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Standar Mutu</div>
+                    <div>{{ $dokumen->standarMutu->nama_standar ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Versi Aktif</div>
+                    <div>v{{ $dokumen->versiAktif->nomor_versi ?? '1.0' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Dibuat Oleh</div>
+                    <div>{{ $dokumen->dibuatOleh->nama ?? '-' }}</div>
+                </div>
             </div>
         </div>
 

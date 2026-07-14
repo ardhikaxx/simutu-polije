@@ -2,7 +2,7 @@
 <html lang="id" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="description" content="SIMUTU POLIJE - Sistem Informasi Penjaminan Mutu Politeknik Negeri Jember">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -17,19 +17,19 @@
     @stack('styles')
 </head>
 <body>
-    <div id="app-wrapper" class="d-flex">
-        <nav id="sidebar" class="sidebar">
+    <div id="app-wrapper" class="app-wrapper d-flex position-relative w-100 overflow-x-hidden">
+        <nav id="sidebar" class="sidebar" aria-label="Navigation Menu">
             <div class="sidebar-header">
                 <a href="{{ route('dashboard') }}" class="sidebar-brand">
                     <span class="sidebar-brand-icon">
                         <img src="{{ asset('assets/logo-polije.png') }}" alt="Logo Polije" height="36" style="object-fit:contain;">
                     </span>
-                    <div class="sidebar-brand-text-group">
+                    <div class="sidebar-brand-text-group ms-1">
                         <span class="sidebar-brand-text">SIMUTU</span>
                         <div class="sidebar-brand-subtitle">Sistem Informasi Penjaminan Mutu</div>
                     </div>
                 </a>
-                <button id="sidebarClose" class="sidebar-close d-lg-none">
+                <button id="sidebarClose" class="sidebar-close d-lg-none" aria-label="Tutup Sidebar">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -37,7 +37,7 @@
             <div class="sidebar-user px-3 py-3">
                 <div class="d-flex align-items-center">
                     <div class="user-avatar me-2">
-                        <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;background:rgba(255,255,255,0.2);color:#fff;font-weight:600;font-size:14px;">
+                        <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;background:rgba(255,255,255,0.2);color:#fff;font-weight:600;font-size:14px;">
                             {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" title="Dashboard">
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
@@ -62,13 +62,13 @@
 
                 @if(auth()->user()->hasRole('super_admin'))
                 <li class="nav-item">
-                    <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" title="Manajemen User">
                         <i class="fas fa-users-cog"></i>
                         <span>Manajemen User</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.roles.index') }}" class="nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.roles.index') }}" class="nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}" title="Manajemen Role">
                         <i class="fas fa-user-shield"></i>
                         <span>Manajemen Role</span>
                     </a>
@@ -80,31 +80,31 @@
                     <small class="text-uppercase fw-bold" style="color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:1px;">Master Data</small>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('master-data.jurusan.index') }}" class="nav-link {{ request()->routeIs('master-data.jurusan.*') ? 'active' : '' }}">
+                    <a href="{{ route('master-data.jurusan.index') }}" class="nav-link {{ request()->routeIs('master-data.jurusan.*') ? 'active' : '' }}" title="Jurusan">
                         <i class="fas fa-building-columns"></i>
                         <span>Jurusan</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('master-data.prodi.index') }}" class="nav-link {{ request()->routeIs('master-data.prodi.*') ? 'active' : '' }}">
+                    <a href="{{ route('master-data.prodi.index') }}" class="nav-link {{ request()->routeIs('master-data.prodi.*') ? 'active' : '' }}" title="Program Studi">
                         <i class="fas fa-graduation-cap"></i>
                         <span>Program Studi</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('master-data.unit-kerja.index') }}" class="nav-link {{ request()->routeIs('master-data.unit-kerja.*') ? 'active' : '' }}">
+                    <a href="{{ route('master-data.unit-kerja.index') }}" class="nav-link {{ request()->routeIs('master-data.unit-kerja.*') ? 'active' : '' }}" title="Unit Kerja">
                         <i class="fas fa-sitemap"></i>
                         <span>Unit Kerja</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('master-data.tahun-akademik.index') }}" class="nav-link {{ request()->routeIs('master-data.tahun-akademik.*') ? 'active' : '' }}">
+                    <a href="{{ route('master-data.tahun-akademik.index') }}" class="nav-link {{ request()->routeIs('master-data.tahun-akademik.*') ? 'active' : '' }}" title="Tahun Akademik">
                         <i class="fas fa-calendar-days"></i>
                         <span>Tahun Akademik</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('master-data.periode-audit.index') }}" class="nav-link {{ request()->routeIs('master-data.periode-audit.*') ? 'active' : '' }}">
+                    <a href="{{ route('master-data.periode-audit.index') }}" class="nav-link {{ request()->routeIs('master-data.periode-audit.*') ? 'active' : '' }}" title="Periode Audit">
                         <i class="fas fa-calendar-check"></i>
                         <span>Periode Audit</span>
                     </a>
@@ -116,25 +116,25 @@
                     <small class="text-uppercase fw-bold" style="color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:1px;">Penjaminan Mutu</small>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('standar-mutu.index') }}" class="nav-link {{ request()->routeIs('standar-mutu.*') ? 'active' : '' }}">
+                    <a href="{{ route('standar-mutu.index') }}" class="nav-link {{ request()->routeIs('standar-mutu.*') ? 'active' : '' }}" title="Standar Mutu">
                         <i class="fas fa-balance-scale"></i>
                         <span>Standar Mutu</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('dokumen-mutu.index') }}" class="nav-link {{ request()->routeIs('dokumen-mutu.*') ? 'active' : '' }}">
+                    <a href="{{ route('dokumen-mutu.index') }}" class="nav-link {{ request()->routeIs('dokumen-mutu.*') ? 'active' : '' }}" title="Dokumen Mutu">
                         <i class="fas fa-file-alt"></i>
                         <span>Dokumen Mutu</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('template-dokumen.index') }}" class="nav-link {{ request()->routeIs('template-dokumen.*') ? 'active' : '' }}">
+                    <a href="{{ route('template-dokumen.index') }}" class="nav-link {{ request()->routeIs('template-dokumen.*') ? 'active' : '' }}" title="Template Dokumen">
                         <i class="fas fa-file-download"></i>
                         <span>Template Dokumen</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('ppepp.index') }}" class="nav-link {{ request()->routeIs('ppepp.*') ? 'active' : '' }}">
+                    <a href="{{ route('ppepp.index') }}" class="nav-link {{ request()->routeIs('ppepp.*') ? 'active' : '' }}" title="PPEPP">
                         <i class="fas fa-sync-alt"></i>
                         <span>PPEPP</span>
                     </a>
@@ -143,7 +143,7 @@
 
                 @if(auth()->user()->hasAnyRole(['super_admin', 'admin_spmi', 'auditor', 'auditor_ketua']))
                 <li class="nav-item">
-                    <a href="{{ route('audit.index') }}" class="nav-link {{ request()->routeIs('audit.*', 'jadwal-audit.*') ? 'active' : '' }}">
+                    <a href="{{ route('audit.index') }}" class="nav-link {{ request()->routeIs('audit.*', 'jadwal-audit.*') ? 'active' : '' }}" title="Audit Mutu">
                         <i class="fas fa-clipboard-check"></i>
                         <span>Audit Mutu</span>
                     </a>
@@ -152,7 +152,7 @@
 
                 @if(auth()->user()->hasAnyRole(['super_admin', 'admin_spmi', 'kajur', 'kaprodi', 'gpm', 'auditor', 'auditor_ketua']))
                 <li class="nav-item">
-                    <a href="{{ route('tindak-lanjut.index') }}" class="nav-link {{ request()->routeIs('tindak-lanjut.*') ? 'active' : '' }}">
+                    <a href="{{ route('tindak-lanjut.index') }}" class="nav-link {{ request()->routeIs('tindak-lanjut.*') ? 'active' : '' }}" title="Tindak Lanjut">
                         <i class="fas fa-tasks"></i>
                         <span>Tindak Lanjut</span>
                     </a>
@@ -161,7 +161,7 @@
 
                 @if(auth()->user()->hasAnyRole(['super_admin', 'admin_spmi', 'kajur', 'kaprodi', 'mahasiswa', 'alumni', 'mitra_industri']))
                 <li class="nav-item">
-                    <a href="{{ route('survei.index') }}" class="nav-link {{ request()->routeIs('survei.*') ? 'active' : '' }}">
+                    <a href="{{ route('survei.index') }}" class="nav-link {{ request()->routeIs('survei.*') ? 'active' : '' }}" title="Survei">
                         <i class="fas fa-poll"></i>
                         <span>Survei</span>
                     </a>
@@ -170,13 +170,13 @@
 
                 @if(auth()->user()->hasAnyRole(['super_admin', 'admin_spmi', 'kajur', 'kaprodi', 'gpm', 'auditor', 'auditor_ketua', 'pimpinan']))
                 <li class="nav-item">
-                    <a href="{{ route('laporan.index') }}" class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
+                    <a href="{{ route('laporan.index') }}" class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}" title="Laporan">
                         <i class="fas fa-chart-bar"></i>
                         <span>Laporan</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('kalender.index') }}" class="nav-link {{ request()->routeIs('kalender.*') ? 'active' : '' }}">
+                    <a href="{{ route('kalender.index') }}" class="nav-link {{ request()->routeIs('kalender.*') ? 'active' : '' }}" title="Kalender Aktivitas">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Kalender Aktivitas</span>
                     </a>
@@ -188,19 +188,19 @@
                     <small class="text-uppercase fw-bold" style="color:rgba(255,255,255,0.4);font-size:0.65rem;letter-spacing:1px;">Sistem</small>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.activity-log.index') }}" class="nav-link {{ request()->routeIs('admin.activity-log.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.activity-log.index') }}" class="nav-link {{ request()->routeIs('admin.activity-log.*') ? 'active' : '' }}" title="Activity Log">
                         <i class="fas fa-history"></i>
                         <span>Activity Log</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('aktivitas.index') }}" class="nav-link {{ request()->routeIs('aktivitas.*') ? 'active' : '' }}">
+                    <a href="{{ route('aktivitas.index') }}" class="nav-link {{ request()->routeIs('aktivitas.*') ? 'active' : '' }}" title="Tracking Aktivitas">
                         <i class="fas fa-user-clock"></i>
                         <span>Tracking Aktivitas</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.settings.index') }}" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.settings.index') }}" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}" title="Pengaturan">
                         <i class="fas fa-cog"></i>
                         <span>Pengaturan</span>
                     </a>
@@ -215,19 +215,19 @@
             </div>
         </nav>
 
-        <div id="main-wrapper" class="main-wrapper grow">
+        <div id="main-wrapper" class="main-wrapper d-flex flex-column flex-grow-1 min-w-0">
             <nav class="navbar navbar-expand-lg topbar">
                 <div class="container-fluid">
-                    <button id="sidebarToggle" class="btn btn-link topbar-btn me-2">
+                    <button id="sidebarToggle" class="btn btn-link topbar-btn me-2" aria-label="Toggle Navigation Sidebar">
                         <i class="fas fa-bars"></i>
                     </button>
 
-                    <div class="d-none d-lg-flex grow ms-3">
+                    <div class="d-none d-lg-flex flex-grow-1 ms-3">
                     </div>
 
-                    <ul class="navbar-nav ms-auto align-items-center">
+                    <ul class="navbar-nav ms-auto d-flex flex-row align-items-center gap-1 gap-sm-2">
                         <li class="nav-item">
-                            <a href="{{ route('notifikasi.index') }}" class="btn btn-link topbar-btn position-relative" title="Notifikasi">
+                            <a href="{{ route('notifikasi.index') }}" class="btn btn-link topbar-btn position-relative d-flex align-items-center justify-content-center" title="Notifikasi" aria-label="Notifikasi" style="width:38px;height:38px;">
                                 <i class="fas fa-bell"></i>
                                 @php $unreadCount = auth()->user()->unreadNotifications->count(); @endphp
                                 @if($unreadCount > 0)
@@ -243,16 +243,16 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center topbar-user" href="#" role="button" data-bs-toggle="dropdown">
-                                <div class="avatar-placeholder-sm rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;background:#1a237e;color:#fff;font-weight:600;font-size:12px;">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center topbar-user py-1 px-2" href="#" role="button" data-bs-toggle="dropdown">
+                                <div class="avatar-placeholder-sm rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:32px;height:32px;background:#1a237e;color:#fff;font-weight:600;font-size:12px;">
                                     {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
                                 </div>
-                                <span class="d-none d-lg-inline text-dark ms-2" style="font-size:0.85rem;">{{ auth()->user()->nama }}</span>
+                                <span class="d-none d-lg-inline text-dark ms-2 text-truncate" style="font-size:0.85rem;max-width:140px;">{{ auth()->user()->nama }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow">
                                 <li class="dropdown-header">
-                                    <div class="fw-semibold">{{ auth()->user()->nama }}</div>
-                                    <div class="text-muted small">{{ auth()->user()->email }}</div>
+                                    <div class="fw-semibold text-truncate" style="max-width:200px;">{{ auth()->user()->nama }}</div>
+                                    <div class="text-muted small text-truncate" style="max-width:200px;">{{ auth()->user()->email }}</div>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
@@ -280,8 +280,8 @@
                 </div>
             </nav>
 
-            <div class="content-wrapper">
-                <div class="container-fluid px-4 py-3">
+            <div class="content-wrapper flex-grow-1">
+                <div class="container-fluid px-2 px-sm-3 px-lg-4 py-3">
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
@@ -300,9 +300,9 @@
                 </div>
             </div>
 
-            <footer class="main-footer">
-                <div class="container-fluid px-4">
-                    <div class="d-flex justify-content-between align-items-center">
+            <footer class="main-footer mt-auto">
+                <div class="container-fluid px-3 px-lg-4">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-1 text-center text-sm-start">
                         <span style="font-size:0.78rem;color:#6c757d;">
                             &copy; {{ date('Y') }} SIMUTU POLIJE - Politeknik Negeri Jember
                         </span>

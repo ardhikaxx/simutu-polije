@@ -130,6 +130,22 @@
             color: #6b7280;
             cursor: pointer;
         }
+
+        @media (max-width: 575.98px) {
+            .register-body {
+                padding: 1.25rem 1rem;
+            }
+            .register-header {
+                padding: 1.5rem 1rem 1.25rem;
+            }
+            .register-body .form-control,
+            .register-body .form-select {
+                font-size: 16px !important;
+            }
+            .register-footer {
+                padding: 0.75rem 1rem 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>

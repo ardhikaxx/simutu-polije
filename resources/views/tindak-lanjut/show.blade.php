@@ -22,19 +22,41 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white"><h6 class="mb-0 fw-bold">Informasi Temuan</h6></div>
             <div class="card-body">
-                <table class="table table-borderless mb-0">
-                    <tr><td class="text-muted" style="width:180px">Deskripsi Temuan</td><td>{{ $tl->temuanAudit->deskripsi_temuan ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Kategori</td><td><span class="badge bg-info">{{ $tl->temuanAudit->kategori_temuan ?? '-' }}</span></td></tr>
-                    <tr><td class="text-muted">Tingkat Risiko</td><td>{{ $tl->temuanAudit->tingkat_risiko ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Rekomendasi</td><td>{{ $tl->temuanAudit->rekomendasi ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Rencana Tindak Lanjut</td><td>{{ $tl->rencana_tindak_lanjut ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Penanggung Jawab</td><td>{{ $tl->penanggungJawab->nama ?? '-' }}</td></tr>
-                    <tr><td class="text-muted">Target Selesai</td><td>{{ $tl->target_selesai ? $tl->target_selesai->format('d/m/Y') : '-' }}</td></tr>
-                    <tr><td class="text-muted">Status</td><td>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Deskripsi Temuan</div>
+                    <div>{{ $tl->temuanAudit->deskripsi_temuan ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Kategori</div>
+                    <div><span class="badge bg-info">{{ $tl->temuanAudit->kategori_temuan ?? '-' }}</span></div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Tingkat Risiko</div>
+                    <div>{{ $tl->temuanAudit->tingkat_risiko ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Rekomendasi</div>
+                    <div>{{ $tl->temuanAudit->rekomendasi ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Rencana Tindak Lanjut</div>
+                    <div>{{ $tl->rencana_tindak_lanjut ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Penanggung Jawab</div>
+                    <div>{{ $tl->penanggungJawab->nama ?? '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2 pb-2 border-bottom">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Target Selesai</div>
+                    <div>{{ $tl->target_selesai ? $tl->target_selesai->format('d/m/Y') : '-' }}</div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row mb-2">
+                    <div class="text-muted fw-semibold" style="min-width:160px;">Status</div>
+                    <div>
                         @php $sb = match($tl->status) { 'Closed'=>'success', 'Verified'=>'success', 'On Progress'=>'warning', 'Need Revision'=>'danger', default=>'secondary' }; @endphp
                         <span class="badge bg-{{ $sb }}">{{ $tl->status }}</span>
-                    </td></tr>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
 
