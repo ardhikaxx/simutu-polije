@@ -23,7 +23,7 @@
 <div class="card border-0 shadow-sm mb-4">
     <div class="card-body">
         <form method="GET" class="row g-3 align-items-end">
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
                 <label class="form-label small fw-semibold">Periode Audit</label>
                 <select name="periode" class="form-select">
                     <option value="">Semua Periode</option>
@@ -32,7 +32,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
                 <label class="form-label small fw-semibold">Status</label>
                 <select name="status" class="form-select">
                     <option value="">Semua Status</option>
@@ -41,7 +41,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
                 <button type="submit" class="btn btn-primary w-100"><i class="fas fa-filter me-1"></i>Filter</button>
             </div>
         </form>

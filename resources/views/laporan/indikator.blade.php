@@ -14,7 +14,7 @@
             </ol>
         </nav>
     </div>
-    <div class="d-flex gap-2">
+    <div class="d-flex flex-wrap gap-2">
         <a href="{{ route('laporan.download-pdf', ['indikator', 0]) }}" class="btn btn-outline-danger"><i class="fas fa-file-pdf me-1"></i>PDF</a>
         <a href="{{ route('laporan.download-excel', ['indikator', 0]) }}" class="btn btn-outline-success"><i class="fas fa-file-excel me-1"></i>Excel</a>
         <a href="{{ route('laporan.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i>Kembali</a>

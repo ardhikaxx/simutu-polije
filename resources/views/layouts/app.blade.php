@@ -203,7 +203,6 @@
 
                     <div class="d-none d-lg-flex flex-grow-1 ms-3">
                     </div>
-                    </div>
 
                     <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item me-2">
