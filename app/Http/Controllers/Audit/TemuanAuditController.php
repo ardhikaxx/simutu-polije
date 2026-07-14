@@ -20,6 +20,8 @@ class TemuanAuditController extends Controller
             'standar_mutu_id' => 'nullable|exists:standar_mutu,id',
         ]);
 
+        $validated['kategori_temuan'] = $validated['kategori_temuan'] === 'Major' ? 'Mayor' : $validated['kategori_temuan'];
+
         TemuanAudit::create($validated);
 
         return redirect()->route('audit.hasil.show', $validated['hasil_audit_id'])
@@ -35,6 +37,8 @@ class TemuanAuditController extends Controller
             'rekomendasi' => 'nullable|string',
             'standar_mutu_id' => 'nullable|exists:standar_mutu,id',
         ]);
+
+        $validated['kategori_temuan'] = $validated['kategori_temuan'] === 'Major' ? 'Mayor' : $validated['kategori_temuan'];
 
         $temuan->update($validated);
 

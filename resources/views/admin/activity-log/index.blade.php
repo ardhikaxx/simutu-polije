@@ -17,9 +17,6 @@
 
 <div class="card border-0 shadow-sm">
     <div class="card-body">
-        @php
-            $logs = Spatie\Activitylog\Models\Activity::with('causer')->latest()->get();
-        @endphp
         <div class="table-responsive">
             <table class="table table-striped table-bordered align-middle" id="dataTable">
                 <thead class="table-light">

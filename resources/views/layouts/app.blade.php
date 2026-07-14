@@ -202,14 +202,7 @@
                     </button>
 
                     <div class="d-none d-lg-flex flex-grow-1 ms-3">
-                        <form class="d-flex w-100" style="max-width:400px;">
-                            <div class="input-group input-group-sm">
-                                <input type="search" class="form-control" placeholder="Cari menu, dokumen..." aria-label="Search">
-                                <button class="btn btn-outline-secondary" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
+                    </div>
                     </div>
 
                     <ul class="navbar-nav ms-auto align-items-center">

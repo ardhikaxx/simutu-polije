@@ -88,7 +88,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/roles/{role}', [AdminRoleController::class, 'destroy'])->name('roles.destroy');
 
         Route::get('/activity-log', function () {
-            return view('admin.activity-log.index');
+            $logs = \Spatie\Activitylog\Models\Activity::with('causer')->latest()->get();
+            return view('admin.activity-log.index', compact('logs'));
         })->name('activity-log.index');
 
         Route::get('/settings', function () {

@@ -76,7 +76,7 @@ class SurveiController extends Controller
 
     public function fillForm(Survei $survei)
     {
-        $survei->load(['jenisSurvei', 'pertanyaanSurvei' => function ($q) {
+        $survei->load(['jenisSurvei', 'tahunAkademik', 'pertanyaanSurvei' => function ($q) {
             $q->orderBy('urutan');
         }]);
 

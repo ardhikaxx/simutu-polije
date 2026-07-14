@@ -75,16 +75,18 @@ class TindakLanjutController extends Controller
 
         $tl = $progress->tindakLanjutTemuan;
 
-        $allVerified = $tl->tindakLanjutProgress()
-            ->where('status_verifikasi', '!=', 'Ditolak')
-            ->count() > 0;
+        $pendingCount = $tl->tindakLanjutProgress()
+            ->where('status_verifikasi', 'Pending')
+            ->count();
 
-        $hasVerified = $tl->tindakLanjutProgress()
-            ->where('status_verifikasi', 'Diterima')
-            ->count() > 0;
+        $rejectedCount = $tl->tindakLanjutProgress()
+            ->where('status_verifikasi', 'Ditolak')
+            ->count();
 
-        if ($hasVerified) {
+        if ($pendingCount === 0 && $rejectedCount === 0) {
             $tl->update(['status' => 'Closed']);
+        } elseif ($pendingCount === 0 && $rejectedCount > 0) {
+            $tl->update(['status' => 'Need Revision']);
         }
 
         return redirect()->route('tindak-lanjut.show', $tl)
