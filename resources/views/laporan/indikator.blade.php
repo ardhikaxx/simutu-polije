@@ -21,22 +21,50 @@
     </div>
 </div>
 
+@if($tahunAkademikAktif)
+<div class="alert alert-info">
+    <i class="fas fa-info-circle me-2"></i>Menampilkan data indikator untuk Tahun Akademik <strong>{{ $tahunAkademikAktif->nama }}</strong>.
+</div>
+@else
+<div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle me-2"></i>Belum ada tahun akademik aktif.
+</div>
+@endif
+
 <div class="card border-0 shadow-sm">
     <div class="card-body">
-        @if($tahunAkademikAktif)
-        <div class="alert alert-info">
-            <i class="fas fa-info-circle me-2"></i>Menampilkan data indikator untuk Tahun Akademik <strong>{{ $tahunAkademikAktif->nama }}</strong>.
-        </div>
-        @else
-        <div class="alert alert-warning">
-            <i class="fas fa-exclamation-triangle me-2"></i>Belum ada tahun akademik aktif.
-        </div>
-        @endif
-
-        <div class="text-center py-5">
-            <i class="fas fa-chart-line fa-3x text-muted mb-3"></i>
-            <h5 class="fw-bold">Laporan Indikator Mutu</h5>
-            <p class="text-muted">Halaman laporan capaian indikator akan menampilkan data target vs capaian untuk setiap indikator mutu.</p>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle small">
+                <thead class="table-light">
+                    <tr><th>No</th><th>Standar Mutu</th><th>Indikator</th><th>Formula</th><th>Frekuensi</th><th>Target</th><th>Capaian</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    @forelse($indikators as $idx => $item)
+                    @php
+                        $target = $item->targetIndikator->latest()->first();
+                        $capaian = $item->capaianIndikator->latest()->first();
+                    @endphp
+                    <tr>
+                        <td>{{ $idx + 1 }}</td>
+                        <td>{{ $item->standarMutu->nama_standar ?? '-' }}</td>
+                        <td>{{ $item->nama_indikator }}</td>
+                        <td>{{ $item->formula_perhitungan ?? '-' }}</td>
+                        <td>{{ $item->frekuensi_pengukuran }}</td>
+                        <td>{{ $target ? $target->nilai_target : '-' }}</td>
+                        <td>{{ $capaian ? $capaian->nilai_capaian : '-' }}</td>
+                        <td>
+                            @if($capaian)
+                                @if($capaian->status_warna === 'baik')<span class="badge bg-success">Baik</span>
+                                @elseif($capaian->status_warna === 'perlu_perbaikan')<span class="badge bg-warning text-dark">Perlu Perbaikan</span>
+                                @else<span class="badge bg-danger">Tidak Baik</span>@endif
+                            @else <span class="text-muted">-</span> @endif
+                        </td>
+                    </tr>
+                    @empty
+                    <tr><td colspan="8" class="text-center text-muted py-4">Belum ada data indikator.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
