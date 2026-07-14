@@ -208,16 +208,16 @@
                     </div>
 
                     <ul class="navbar-nav ms-auto align-items-center">
-                        <li class="nav-item me-2">
+                        <li class="nav-item">
                             <a href="{{ route('notifikasi.index') }}" class="btn btn-link topbar-btn position-relative" title="Notifikasi">
                                 <i class="fas fa-bell"></i>
                                 @php $unreadCount = auth()->user()->unreadNotifications->count(); @endphp
                                 @if($unreadCount > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notification-badge" style="font-size:0.6rem;">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge-top" style="font-size:0.6rem;">
                                         {{ $unreadCount > 99 ? '99+' : $unreadCount }}
                                     </span>
                                 @else
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="notification-badge" style="font-size:0.6rem;">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none notification-badge-top" style="font-size:0.6rem;">
                                         0
                                     </span>
                                 @endif
@@ -226,12 +226,10 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center topbar-user" href="#" role="button" data-bs-toggle="dropdown">
-                                <div class="user-avatar-sm me-2">
-                                    <div class="avatar-placeholder-sm rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;background:#1a237e;color:#fff;font-weight:600;font-size:12px;">
-                                        {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
-                                    </div>
+                                <div class="avatar-placeholder-sm rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;background:#1a237e;color:#fff;font-weight:600;font-size:12px;">
+                                    {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
                                 </div>
-                                <span class="d-none d-md-inline text-dark" style="font-size:0.85rem;">{{ auth()->user()->nama }}</span>
+                                <span class="d-none d-lg-inline text-dark ms-2" style="font-size:0.85rem;">{{ auth()->user()->nama }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow">
                                 <li class="dropdown-header">

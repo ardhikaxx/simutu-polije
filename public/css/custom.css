@@ -436,6 +436,42 @@ body {
     }
 }
 
+/* ---- Topbar Responsive ---- */
+@media (max-width: 575.98px) {
+    .topbar {
+        padding: 0 0.5rem;
+    }
+
+    .topbar .navbar-nav {
+        gap: 0;
+    }
+
+    .topbar .navbar-nav .nav-item {
+        margin-right: 0 !important;
+    }
+
+    .topbar-btn {
+        font-size: 1rem;
+        padding: 0.35rem;
+    }
+
+    .topbar-user {
+        padding: 0.25rem 0.4rem;
+    }
+
+    .avatar-placeholder-sm {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 11px !important;
+    }
+
+    .notification-badge-top {
+        font-size: 0.5rem !important;
+        top: 0 !important;
+        start: 85% !important;
+    }
+}
+
 /* ---- Print ---- */
 @media print {
     .sidebar,
