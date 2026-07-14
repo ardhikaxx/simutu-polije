@@ -31,6 +31,7 @@ Sistem informasi berbasis web untuk mengelola seluruh siklus penjaminan mutu pen
 - [Screenshots](#screenshots)
 - [Kontribusi](#kontribusi)
 - [License](#license)
+- [Donasi](#donasi)
 
 ---
 
@@ -439,6 +440,25 @@ Gunakan [Conventional Commits](https://www.conventionalcommits.org/):
 ## License
 
 MIT License - Lihat file [LICENSE](LICENSE) untuk informasi lebih lanjut.
+
+---
+
+## Donasi
+
+Jika project ini bermanfaat, Anda dapat mendukung pengembangan selanjutnya melalui donasi:
+
+<div align="center">
+
+![QRIS](public/assets/qris.png)
+
+**Scan QRIS di atas untuk berdonasi**
+
+Setiap donasi akan digunakan untuk:
+- Pengembangan fitur baru
+- Perbaikan bug & maintenance
+- Infrastruktur server
+
+</div>
 
 ---
 
