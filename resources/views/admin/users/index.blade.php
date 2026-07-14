@@ -43,8 +43,9 @@
                         <th>Email</th>
                         <th>NIP/NIM</th>
                         <th>Role</th>
+                        <th>Terakhir Login</th>
                         <th>Status</th>
-                        <th width="150">Aksi</th>
+                        <th width="180">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,12 +60,16 @@
                                 {{ $user->getRoleNames()->first() ?? '-' }}
                             </span>
                         </td>
+                        <td class="small">{{ $user->last_login_at ? $user->last_login_at->format('d/m/Y H:i') : '-' }}</td>
                         <td>
                             <span class="badge bg-{{ $user->status === 'aktif' ? 'success' : 'danger' }}">
                                 {{ ucfirst($user->status ?? '-') }}
                             </span>
                         </td>
                         <td>
+                            <a href="{{ route('admin.users.login-history', $user) }}" class="btn btn-sm btn-outline-info" title="Riwayat Login">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </a>
                             <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-outline-primary" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </a>
@@ -79,7 +84,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7" class="text-center text-muted py-4">
+                        <td colspan="8" class="text-center text-muted py-4">
                             <i class="fas fa-users fa-2x mb-2 d-block"></i>
                             Belum ada data user.
                         </td>

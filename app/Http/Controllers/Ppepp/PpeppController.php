@@ -10,13 +10,22 @@ use Illuminate\Http\Request;
 
 class PpeppController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sikluses = PpeppSiklus::with(['standarMutu', 'tahunAkademik'])
-            ->latest()
-            ->get();
+        $query = PpeppSiklus::with(['standarMutu', 'tahunAkademik']);
 
-        return view('ppepp.index', compact('sikluses'));
+        if ($request->filled('tahun_akademik_id')) {
+            $query->where('tahun_akademik_id', $request->tahun_akademik_id);
+        }
+
+        if ($request->filled('status_siklus')) {
+            $query->where('status_siklus', $request->status_siklus);
+        }
+
+        $sikluses = $query->latest()->get();
+        $tahunAkademiks = \App\Models\TahunAkademik::orderByDesc('created_at')->get();
+
+        return view('ppepp.index', compact('sikluses', 'tahunAkademiks'));
     }
 
     public function show(PpeppSiklus $siklus)

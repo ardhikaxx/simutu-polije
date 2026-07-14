@@ -13,6 +13,9 @@
             </ol>
         </nav>
     </div>
+    <a href="{{ route('template-dokumen.download-all') }}" class="btn btn-danger">
+        <i class="fas fa-file-pdf me-1"></i>Download Semua Template (PDF)
+    </a>
 </div>
 
 <div class="card border-0 shadow-sm mb-4">

@@ -23,26 +23,43 @@
 <div class="card border-0 shadow-sm mb-4">
     <div class="card-body">
         <form method="GET" class="row g-3 align-items-end">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-3">
                 <label class="form-label small fw-semibold">Periode Audit</label>
-                <select name="periode" class="form-select">
+                <select name="periode" class="form-select form-select-sm">
                     <option value="">Semua Periode</option>
                     @foreach($periodeAudits as $pa)
                     <option value="{{ $pa->id }}" {{ request('periode') == $pa->id ? 'selected' : '' }}>{{ $pa->nama }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-3">
+                <label class="form-label small fw-semibold">Program Studi</label>
+                <select name="program_studi_id" class="form-select form-select-sm">
+                    <option value="">Semua Prodi</option>
+                    @foreach($prodis as $prodi)
+                    <option value="{{ $prodi->id }}" {{ request('program_studi_id') == $prodi->id ? 'selected' : '' }}>{{ $prodi->nama_prodi }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-6 col-md-2">
+                <label class="form-label small fw-semibold">Dari Tanggal</label>
+                <input type="date" name="tanggal_mulai" class="form-control form-control-sm" value="{{ request('tanggal_mulai') }}">
+            </div>
+            <div class="col-6 col-md-2">
+                <label class="form-label small fw-semibold">Sampai Tanggal</label>
+                <input type="date" name="tanggal_selesai" class="form-control form-control-sm" value="{{ request('tanggal_selesai') }}">
+            </div>
+            <div class="col-6 col-md-1">
                 <label class="form-label small fw-semibold">Status</label>
-                <select name="status" class="form-select">
-                    <option value="">Semua Status</option>
+                <select name="status" class="form-select form-select-sm">
+                    <option value="">Semua</option>
                     @foreach(['Draft', 'Terjadwal', 'Berlangsung', 'Selesai'] as $s)
                     <option value="{{ $s }}" {{ request('status') == $s ? 'selected' : '' }}>{{ $s }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-12 col-md-4">
-                <button type="submit" class="btn btn-primary w-100"><i class="fas fa-filter me-1"></i>Filter</button>
+            <div class="col-6 col-md-1">
+                <button type="submit" class="btn btn-sm btn-primary w-100"><i class="fas fa-filter me-1"></i>Filter</button>
             </div>
         </form>
     </div>

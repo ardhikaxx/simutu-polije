@@ -45,4 +45,18 @@ class TemplateDokumenController extends Controller
 
         return $pdf->download('template-' . $template->standarMutu->kode_standar . '.pdf');
     }
+
+    public function downloadAll()
+    {
+        $templates = TemplateDokumen::with('standarMutu.indikatorMutu')
+            ->where('is_active', true)
+            ->orderBy('standar_mutu_id')
+            ->get();
+
+        $pdf = Pdf::loadView('dokumen-mutu.pdf-all-templates', [
+            'templates' => $templates,
+        ])->setPaper('a4', 'portrait');
+
+        return $pdf->download('semua-template-dokumen-mutu.pdf');
+    }
 }

@@ -103,4 +103,15 @@ class AdminUserController extends Controller
         return redirect()->route('admin.users.index')
             ->with('success', 'User berhasil dihapus.');
     }
+
+    public function loginHistory(User $user)
+    {
+        $activities = \Spatie\Activitylog\Models\Activity::where('causer_id', $user->id)
+            ->whereIn('event', ['login', 'login_failed'])
+            ->with('causer')
+            ->latest()
+            ->get();
+
+        return view('admin.users.login-history', compact('user', 'activities'));
+    }
 }

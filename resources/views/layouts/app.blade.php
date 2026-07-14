@@ -175,6 +175,12 @@
                         <span>Laporan</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('kalender.index') }}" class="nav-link {{ request()->routeIs('kalender.*') ? 'active' : '' }}">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Kalender Aktivitas</span>
+                    </a>
+                </li>
                 @endif
 
                 @if(auth()->user()->hasRole('super_admin'))
@@ -209,14 +215,14 @@
             </div>
         </nav>
 
-        <div id="main-wrapper" class="main-wrapper flex-grow-1">
+        <div id="main-wrapper" class="main-wrapper grow">
             <nav class="navbar navbar-expand-lg topbar">
                 <div class="container-fluid">
                     <button id="sidebarToggle" class="btn btn-link topbar-btn me-2">
                         <i class="fas fa-bars"></i>
                     </button>
 
-                    <div class="d-none d-lg-flex flex-grow-1 ms-3">
+                    <div class="d-none d-lg-flex grow ms-3">
                     </div>
 
                     <ul class="navbar-nav ms-auto align-items-center">
@@ -225,11 +231,11 @@
                                 <i class="fas fa-bell"></i>
                                 @php $unreadCount = auth()->user()->unreadNotifications->count(); @endphp
                                 @if($unreadCount > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge-top" style="font-size:0.6rem;">
+                                    <span class="position-absolute top-0 inset-s-100 translate-middle badge rounded-pill bg-danger notification-badge-top" style="font-size:0.6rem;">
                                         {{ $unreadCount > 99 ? '99+' : $unreadCount }}
                                     </span>
                                 @else
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none notification-badge-top" style="font-size:0.6rem;">
+                                    <span class="position-absolute top-0 inset-s-100 translate-middle badge rounded-pill bg-danger d-none notification-badge-top" style="font-size:0.6rem;">
                                         0
                                     </span>
                                 @endif

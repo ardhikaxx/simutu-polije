@@ -22,6 +22,7 @@ use App\Http\Controllers\StandarMutu\IndikatorMutuController;
 use App\Http\Controllers\StandarMutu\StandarMutuController;
 use App\Http\Controllers\Survei\SurveiController;
 use App\Http\Controllers\TindakLanjut\TindakLanjutController;
+use App\Http\Controllers\Kalender\KalenderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -88,6 +89,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->middleware('role:super_admin')->group(function () {
         Route::resource('users', AdminUserController::class)->except(['show']);
+        Route::get('users/{user}/login-history', [AdminUserController::class, 'loginHistory'])->name('users.login-history');
 
         Route::get('/roles', [AdminRoleController::class, 'index'])->name('roles.index');
         Route::post('/roles', [AdminRoleController::class, 'store'])->name('roles.store');
@@ -135,6 +137,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('dokumen-mutu/{dokumen}/revisi', [DokumenMutuController::class, 'revisi'])->name('dokumen-mutu.revisi');
 
         Route::get('template-dokumen', [\App\Http\Controllers\TemplateDokumen\TemplateDokumenController::class, 'index'])->name('template-dokumen.index');
+        Route::get('template-dokumen/download-all', [\App\Http\Controllers\TemplateDokumen\TemplateDokumenController::class, 'downloadAll'])->name('template-dokumen.download-all');
         Route::get('template-dokumen/{template}/download', [\App\Http\Controllers\TemplateDokumen\TemplateDokumenController::class, 'download'])->name('template-dokumen.download');
 
         Route::get('ppepp/dashboard', [PpeppController::class, 'dashboard'])->name('ppepp.dashboard');
@@ -190,4 +193,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
     Route::post('notifikasi/{id}/read', [NotifikasiController::class, 'markAsRead'])->name('notifikasi.mark-read');
     Route::post('notifikasi/read-all', [NotifikasiController::class, 'markAllAsRead'])->name('notifikasi.mark-all-read');
+
+    Route::get('kalender', [KalenderController::class, 'index'])->name('kalender.index');
+    Route::get('kalender/events', [KalenderController::class, 'events'])->name('kalender.events');
 });

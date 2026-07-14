@@ -48,6 +48,8 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
+            $user->update(['last_login_at' => now()]);
+
             activity()
                 ->performedOn($user)
                 ->causedBy($user)

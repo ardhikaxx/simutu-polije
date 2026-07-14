@@ -15,6 +15,34 @@
     </div>
 </div>
 
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <form method="GET" class="row g-3 align-items-end">
+            <div class="col-12 col-md-4">
+                <label class="form-label small fw-semibold">Tahun Akademik</label>
+                <select name="tahun_akademik_id" class="form-select form-select-sm">
+                    <option value="">Semua Tahun</option>
+                    @foreach($tahunAkademiks as $ta)
+                    <option value="{{ $ta->id }}" {{ request('tahun_akademik_id') == $ta->id ? 'selected' : '' }}>{{ $ta->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-6 col-md-4">
+                <label class="form-label small fw-semibold">Status Siklus</label>
+                <select name="status_siklus" class="form-select form-select-sm">
+                    <option value="">Semua Status</option>
+                    @foreach(['Berjalan', 'Selesai'] as $s)
+                    <option value="{{ $s }}" {{ request('status_siklus') == $s ? 'selected' : '' }}>{{ $s }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-6 col-md-4">
+                <button type="submit" class="btn btn-sm btn-primary w-100"><i class="fas fa-filter me-1"></i>Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="row mb-4">
     <div class="col-6 col-md-3">
         <div class="card border-0 shadow-sm bg-primary text-white">

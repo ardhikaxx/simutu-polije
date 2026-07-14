@@ -17,9 +17,24 @@ class TindakLanjutController extends Controller
             $query->where('status', $request->status);
         }
 
-        $tindakLanjuts = $query->latest()->get();
+        if ($request->filled('program_studi_id')) {
+            $query->whereHas('temuanAudit.hasilAudit.jadwalAudit', function ($q) use ($request) {
+                $q->where('program_studi_id', $request->program_studi_id);
+            });
+        }
 
-        return view('tindak-lanjut.index', compact('tindakLanjuts'));
+        if ($request->filled('tanggal_mulai')) {
+            $query->where('target_selesai', '>=', $request->tanggal_mulai);
+        }
+
+        if ($request->filled('tanggal_selesai')) {
+            $query->where('target_selesai', '<=', $request->tanggal_selesai);
+        }
+
+        $tindakLanjuts = $query->latest()->get();
+        $prodis = \App\Models\ProgramStudi::orderBy('nama_prodi')->get();
+
+        return view('tindak-lanjut.index', compact('tindakLanjuts', 'prodis'));
     }
 
     public function show(TindakLanjutTemuan $tl)

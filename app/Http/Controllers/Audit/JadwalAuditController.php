@@ -26,10 +26,23 @@ class JadwalAuditController extends Controller
             $query->where('periode_audit_id', $request->periode);
         }
 
+        if ($request->filled('program_studi_id')) {
+            $query->where('program_studi_id', $request->program_studi_id);
+        }
+
+        if ($request->filled('tanggal_mulai')) {
+            $query->where('tanggal_audit', '>=', $request->tanggal_mulai);
+        }
+
+        if ($request->filled('tanggal_selesai')) {
+            $query->where('tanggal_audit', '<=', $request->tanggal_selesai);
+        }
+
         $jadwalAudits = $query->latest('tanggal_audit')->get();
         $periodeAudits = PeriodeAudit::orderByDesc('created_at')->get();
+        $prodis = \App\Models\ProgramStudi::orderBy('nama_prodi')->get();
 
-        return view('audit.index', compact('jadwalAudits', 'periodeAudits'));
+        return view('audit.index', compact('jadwalAudits', 'periodeAudits', 'prodis'));
     }
 
     public function create()
