@@ -364,35 +364,51 @@ users ──┬── roles (spatie)
 
 ## Screenshots
 
-<details>
-<summary><b>Dashboard Super Admin</b></summary>
+<details open>
+<summary><b>1. Dashboard Super Admin</b></summary>
+
+<br>
+
+![Dashboard Super Admin](public/assets/screenshots/image.png)
 
 - Statistik total user, standar mutu aktif, dokumen, audit berjalan
 - Grafik monitoring real-time
 
 </details>
 
-<details>
-<summary><b>Manajemen Standar Mutu</b></summary>
+<details open>
+<summary><b>2. Manajemen Standar Mutu</b></summary>
+
+<br>
+
+![Standar Mutu](public/assets/screenshots/image.1.png)
 
 - Daftar standar dengan status & versi
 - Form create/edit dengan alur approval
 
 </details>
 
-<details>
-<summary><b>Jadwal Audit</b></summary>
+<details open>
+<summary><b>3. Siklus PPEPP & Dashboard</b></summary>
 
-- Penjadwalan audit per periode
-- Penetapan tim audit
+<br>
 
-</details>
-
-<details>
-<summary><b>PPEPP Dashboard</b></summary>
+![PPEPP Dashboard](public/assets/screenshots/image.2.png)
 
 - Progress siklus PPEPP per standar
 - Monitoring pelaksanaan per prodi
+
+</details>
+
+<details open>
+<summary><b>4. Master Data Program Studi</b></summary>
+
+<br>
+
+![Master Data Program Studi](public/assets/screenshots/image.3.png)
+
+- Manajemen program studi D3, D4, dan S2 Terapan
+- Status aktif dan pemetaan jurusan
 
 </details>
 
