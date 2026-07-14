@@ -14,9 +14,10 @@
             </ol>
         </nav>
     </div>
-    <div class="d-flex gap-2">
+    <div class="d-flex gap-2 flex-wrap">
         @php $badgeClass = match($dokumen->status) { 'Draft'=>'secondary', 'Submitted'=>'warning', 'Reviewed'=>'info', 'Approved'=>'primary', 'Published'=>'success', default=>'secondary' }; @endphp
         <span class="badge bg-{{ $badgeClass }} fs-6">{{ $dokumen->status }}</span>
+        <a href="{{ route('dokumen-mutu.versions', $dokumen) }}" class="btn btn-outline-info"><i class="fas fa-history me-1"></i>Riwayat Revisi</a>
         <a href="{{ route('dokumen-mutu.edit', $dokumen) }}" class="btn btn-outline-primary"><i class="fas fa-edit me-1"></i>Edit</a>
     </div>
 </div>
@@ -41,12 +42,12 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white"><h6 class="mb-0 fw-bold">Riwayat Versi</h6></div>
             <div class="card-body">
-                @forelse($dokumen->dokumenMutuVersions as $ver)
-                <div class="d-flex align-items-start mb-3">
+                @forelse($dokumen->dokumenMutuVersions->take(5) as $ver)
+                <div class="d-flex align-items-start mb-3 {{ !$loop->last ? 'pb-2 border-bottom' : '' }}">
                     <div class="me-3">
                         <span class="badge bg-primary rounded-pill">v{{ $ver->nomor_versi }}</span>
                     </div>
-                    <div>
+                    <div class="flex-grow-1">
                         <div class="small fw-semibold">{{ $ver->catatan_revisi ?? 'Versi awal' }}</div>
                         <div class="text-muted" style="font-size:0.78rem;">Oleh {{ $ver->dibuatOleh->nama ?? '-' }} &middot; {{ $ver->created_at->format('d/m/Y H:i') }}</div>
                     </div>
@@ -54,6 +55,9 @@
                 @empty
                 <p class="text-muted small mb-0">Belum ada riwayat versi.</p>
                 @endforelse
+                @if($dokumen->dokumenMutuVersions->count() > 5)
+                <a href="{{ route('dokumen-mutu.versions', $dokumen) }}" class="text-primary small"><i class="fas fa-arrow-right me-1"></i>Lihat Semua Riwayat</a>
+                @endif
             </div>
         </div>
     </div>

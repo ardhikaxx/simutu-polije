@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div style="font-size:0.75rem;">
-                    <span class="text-muted">Terjadwal / Berlangsung</span>
+                    <span class="text-muted">Draft / Terjadwal / Berlangsung</span>
                 </div>
             </div>
         </div>
@@ -150,12 +150,12 @@
     </div>
 </div>
 
-<div class="row g-3">
+<div class="row g-3 mb-4">
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom-0 pt-3 pb-0">
                 <h6 class="fw-bold mb-0" style="font-size:0.9rem;">
-                    <i class="fas fa-chart-line me-2 text-primary"></i>Capaian Mutu Institusi
+                    <i class="fas fa-chart-line me-2 text-primary"></i>Tren Capaian Mutu Institusi
                 </h6>
             </div>
             <div class="card-body">
@@ -176,30 +176,62 @@
         </div>
     </div>
 </div>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0 pt-3 pb-0">
+                <h6 class="fw-bold mb-0" style="font-size:0.9rem;">
+                    <i class="fas fa-spider me-2 text-info"></i>Capaian vs Target per Standar (Tahun Akademik Aktif)
+                </h6>
+            </div>
+            <div class="card-body">
+                <canvas id="chartRadar" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0 pt-3 pb-0">
+                <h6 class="fw-bold mb-0" style="font-size:0.9rem;">
+                    <i class="fas fa-chart-bar me-2 text-success"></i>Distribusi Status Tindak Lanjut
+                </h6>
+            </div>
+            <div class="card-body">
+                <canvas id="chartTindakLanjut" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Line Chart - Tren Capaian
     const ctxCapaian = document.getElementById('chartCapaianMutu').getContext('2d');
     new Chart(ctxCapaian, {
         type: 'line',
         data: {
-            labels: ['2022/1', '2022/2', '2023/1', '2023/2', '2024/1', '2024/2', '2025/1'],
+            labels: @json($chartLabels),
             datasets: [{
                 label: 'Capaian Indikator (%)',
-                data: [72, 75, 78, 80, 82, 85, 87],
+                data: @json($chartCapaian),
                 borderColor: '#1a237e',
                 backgroundColor: 'rgba(26,35,126,0.1)',
                 fill: true,
-                tension: 0.4
+                tension: 0.4,
+                pointRadius: 4,
+                pointBackgroundColor: '#1a237e'
             }, {
                 label: 'Target (%)',
-                data: [80, 80, 85, 85, 88, 88, 90],
+                data: @json($chartTarget),
                 borderColor: '#e53935',
                 borderDash: [5, 5],
                 fill: false,
-                tension: 0.4
+                tension: 0.4,
+                pointRadius: 4,
+                pointBackgroundColor: '#e53935'
             }]
         },
         options: {
@@ -209,19 +241,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
             },
             scales: {
-                y: { beginAtZero: false, min: 50, max: 100 }
+                y: { beginAtZero: false, min: 0, max: 100, ticks: { callback: v => v + '%' } }
             }
         }
     });
 
-    const ctxPpepp = document.getElementById('chartPpepp').getContext('2d');
-    new Chart(ctxPpepp, {
+    // 2. Doughnut Chart - PPEPP Status
+    const ppeppLabels = @json(array_keys($ppeppStatus));
+    const ppeppValues = @json(array_values($ppeppStatus));
+    const ppeppColors = ['#1a237e', '#3949ab', '#5c6bc0', '#7986cb', '#9fa8da'];
+    new Chart(document.getElementById('chartPpepp').getContext('2d'), {
         type: 'doughnut',
         data: {
-            labels: ['Penetapan', 'Pelaksanaan', 'Evaluasi', 'Pengendalian', 'Peningkatan'],
+            labels: ppeppLabels.length ? ppeppLabels : ['Belum Ada Data'],
             datasets: [{
-                data: [10, 25, 15, 8, 5],
-                backgroundColor: ['#1a237e', '#3949ab', '#5c6bc0', '#7986cb', '#9fa8da']
+                data: ppeppValues.length ? ppeppValues : [1],
+                backgroundColor: ppeppLabels.length ? ppeppColors.slice(0, ppeppLabels.length) : ['#e0e0e0']
             }]
         },
         options: {
@@ -232,6 +267,78 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // 3. Radar Chart - Capaian vs Target per Standar
+    new Chart(document.getElementById('chartRadar').getContext('2d'), {
+        type: 'radar',
+        data: {
+            labels: @json($radarLabels),
+            datasets: [{
+                label: 'Capaian (%)',
+                data: @json($radarData),
+                borderColor: '#1a237e',
+                backgroundColor: 'rgba(26,35,126,0.15)',
+                pointBackgroundColor: '#1a237e'
+            }, {
+                label: 'Target (%)',
+                data: @json($radarTarget),
+                borderColor: '#e53935',
+                backgroundColor: 'rgba(229,57,53,0.05)',
+                borderDash: [4, 4],
+                pointBackgroundColor: '#e53935'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: { beginAtZero: true, max: 100, ticks: { stepSize: 20, font: { size: 10 } } }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+            }
+        }
+    });
+
+    // 4. Bar Chart - Tindak Lanjut
+    const tlCtx = document.getElementById('chartTindakLanjut').getContext('2d');
+    fetch('{{ route("dashboard.tl-stats") }}')
+        .then(r => r.json())
+        .then(data => {
+            new Chart(tlCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        label: 'Jumlah',
+                        data: Object.values(data),
+                        backgroundColor: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, ticks: { stepSize: 1 } }
+                    }
+                }
+            });
+        })
+        .catch(() => {
+            new Chart(tlCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Open', 'On Progress', 'Need Revision', 'Verified', 'Closed'],
+                    datasets: [{ label: 'Jumlah', data: [0,0,0,0,0], backgroundColor: '#e0e0e0', borderRadius: 6 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
+            });
+        });
 });
 </script>
 @endpush

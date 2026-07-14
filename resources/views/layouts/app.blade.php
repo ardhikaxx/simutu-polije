@@ -128,6 +128,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('template-dokumen.index') }}" class="nav-link {{ request()->routeIs('template-dokumen.*') ? 'active' : '' }}">
+                        <i class="fas fa-file-download"></i>
+                        <span>Template Dokumen</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('ppepp.index') }}" class="nav-link {{ request()->routeIs('ppepp.*') ? 'active' : '' }}">
                         <i class="fas fa-sync-alt"></i>
                         <span>PPEPP</span>

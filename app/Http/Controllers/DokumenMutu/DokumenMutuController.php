@@ -159,4 +159,28 @@ class DokumenMutuController extends Controller
 
         return view('dokumen-mutu.versions', compact('dokumen', 'versions'));
     }
+
+    public function revisi(Request $request, DokumenMutu $dokumen)
+    {
+        $validated = $request->validate([
+            'catatan_revisi' => 'required|string|max:1000',
+            'file_revisi' => 'nullable|file|max:10240',
+        ]);
+
+        $lastVersion = $dokumen->dokumenMutuVersions()->latest()->first();
+        $lastNumber = $lastVersion ? floatval($lastVersion->nomor_versi) : 0;
+        $newNumber = number_format($lastNumber + 0.1, 1);
+
+        $version = DokumenMutuVersion::create([
+            'dokumen_mutu_id' => $dokumen->id,
+            'nomor_versi' => $newNumber,
+            'catatan_revisi' => $validated['catatan_revisi'],
+            'dibuat_oleh' => auth()->id(),
+        ]);
+
+        $dokumen->update(['versi_aktif_id' => $version->id, 'status' => 'Draft']);
+
+        return redirect()->route('dokumen-mutu.versions', $dokumen)
+            ->with('success', "Revisi v{$newNumber} berhasil ditambahkan.");
+    }
 }

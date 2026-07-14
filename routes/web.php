@@ -66,6 +66,14 @@ Route::get('/reset-password/{token}', function ($token) {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', DashboardRedirectController::class)->name('dashboard');
 
+    Route::get('/dashboard/tl-stats', function () {
+        $data = \App\Models\TindakLanjutTemuan::selectRaw('status, count(*) as total')
+            ->groupBy('status')
+            ->pluck('total', 'status')
+            ->toArray();
+        return response()->json($data);
+    })->name('dashboard.tl-stats')->middleware('auth');
+
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -124,6 +132,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('dokumen-mutu/{dokumen}/approve', [DokumenMutuController::class, 'approve'])->name('dokumen-mutu.approve');
         Route::post('dokumen-mutu/{dokumen}/publish', [DokumenMutuController::class, 'publish'])->name('dokumen-mutu.publish');
         Route::get('dokumen-mutu/{dokumen}/versions', [DokumenMutuController::class, 'versions'])->name('dokumen-mutu.versions');
+        Route::post('dokumen-mutu/{dokumen}/revisi', [DokumenMutuController::class, 'revisi'])->name('dokumen-mutu.revisi');
+
+        Route::get('template-dokumen', [\App\Http\Controllers\TemplateDokumen\TemplateDokumenController::class, 'index'])->name('template-dokumen.index');
+        Route::get('template-dokumen/{template}/download', [\App\Http\Controllers\TemplateDokumen\TemplateDokumenController::class, 'download'])->name('template-dokumen.download');
 
         Route::get('ppepp/dashboard', [PpeppController::class, 'dashboard'])->name('ppepp.dashboard');
         Route::resource('ppepp', PpeppController::class)->parameters(['ppepp' => 'siklus'])->only(['index', 'show']);
